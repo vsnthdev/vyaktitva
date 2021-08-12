@@ -1,0 +1,31 @@
+{
+    "name": "vyaktitva",
+    "description": "( व्यक्तित्व ) — A component based UI library for Vasanth Developer's projects.",
+    "version": "0.0.1",
+    "license": "UNLICENSED",
+    "type": "module",
+    "main": "./dist/index.cjs.js",
+    "module": "./dist/index.js",
+    "collection": "./dist/collection/collection-manifest.json",
+    "types": "./dist/types/components.d.ts",
+    "homepage": "https://github.com/vsnthdev/vyaktitva#readme",
+    "bugs": "https://github.com/vsnthdev/vyaktitva/issues",
+    "author": {
+        "name": "Vasanth Developer",
+        "email": "vasanth@vasanthdeveloper.com",
+        "url": "https://vsnth.dev"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vsnthdev/vyaktitva.git"
+    },
+    "scripts": {
+        "dev": "stencil build --dev --watch --serve",
+        "build": "npm run clean && stencil build",
+        "clean": "rm -rf www dist"
+    },
+    "dependencies": {
+        "@stencil/core": "^2.6.0",
+        "@stencil/helmet": "^0.3.2"
+    }
+}
