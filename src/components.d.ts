@@ -6,38 +6,34 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface VHead {
-        "icon": string;
-        "name": string;
-        "site": string;
+    interface VHeader {
+        "brand": string;
     }
 }
 declare global {
-    interface HTMLVHeadElement extends Components.VHead, HTMLStencilElement {
+    interface HTMLVHeaderElement extends Components.VHeader, HTMLStencilElement {
     }
-    var HTMLVHeadElement: {
-        prototype: HTMLVHeadElement;
-        new (): HTMLVHeadElement;
+    var HTMLVHeaderElement: {
+        prototype: HTMLVHeaderElement;
+        new (): HTMLVHeaderElement;
     };
     interface HTMLElementTagNameMap {
-        "v-head": HTMLVHeadElement;
+        "v-header": HTMLVHeaderElement;
     }
 }
 declare namespace LocalJSX {
-    interface VHead {
-        "icon"?: string;
-        "name"?: string;
-        "site"?: string;
+    interface VHeader {
+        "brand"?: string;
     }
     interface IntrinsicElements {
-        "v-head": VHead;
+        "v-header": VHeader;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "v-head": LocalJSX.VHead & JSXBase.HTMLAttributes<HTMLVHeadElement>;
+            "v-header": LocalJSX.VHeader & JSXBase.HTMLAttributes<HTMLVHeaderElement>;
         }
     }
 }

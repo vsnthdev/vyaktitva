@@ -8,7 +8,7 @@ export const config: Config = {
             serviceWorker: null
         },
         {
-            type: 'dist',
+            type: 'dist'
         }
     ]
 }
