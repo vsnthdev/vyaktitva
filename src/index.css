@@ -9,3 +9,11 @@
 * {
     -webkit-tap-highlight-color: transparent;
 }
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    @apply bg-slate-100;
+}

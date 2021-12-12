@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
     content: [
         './src/**/*.tsx',
@@ -7,7 +9,11 @@ module.exports = {
         fontFamily: {
             body: ['Basically A Sans Serif']
         },
-        extend: {},
+        extend: {
+            slate: colors.slate,
+            transparent: 'transparent',
+            brand: '#006cff'
+        },
     },
     plugins: [],
 }
