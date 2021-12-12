@@ -22,9 +22,12 @@
     "scripts": {
         "dev": "stencil build --dev --watch --serve",
         "build": "npm run clean && stencil build",
-        "clean": "rm -rf www dist"
+        "clean": "rimraf www dist"
     },
     "dependencies": {
         "@stencil/core": "^2.11.0"
+    },
+    "devDependencies": {
+        "rimraf": "^3.0.2"
     }
 }

@@ -1,0 +1,1 @@
+import{p as r,b as a}from"./p-11afeb51.js";(()=>{const a=import.meta.url,e={};return""!==a&&(e.resourcesUrl=new URL(".",a).href),r(e)})().then((r=>a([["p-759401b0",[[0,"v-header",{brand:[1]}]]]],r)));
