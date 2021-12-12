@@ -1,7 +1,30 @@
+'use strict';
+
+function _interopNamespace(e) {
+  if (e && e.__esModule) return e;
+  var n = Object.create(null);
+  if (e) {
+    Object.keys(e).forEach(function (k) {
+      if (k !== 'default') {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: function () {
+            return e[k];
+          }
+        });
+      }
+    });
+  }
+  n['default'] = e;
+  return Object.freeze(n);
+}
+
 const NAMESPACE = 'vyaktitva';
 
 let scopeId;
 let hostTagName;
+let isSvgMode = false;
 let queuePending = false;
 const win = typeof window !== 'undefined' ? window : {};
 const doc = win.document || { head: {} };
@@ -112,6 +135,11 @@ const getScopeId = (cmp, mode) => 'sc-' + (cmp.$tagName$);
  * Don't add values to these!!
  */
 const EMPTY_OBJ = {};
+/**
+ * Namespaces
+ */
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const HTML_NS = 'http://www.w3.org/1999/xhtml';
 const isDef = (v) => v != null;
 const isComplexType = (o) => {
     // https://jsperf.com/typeof-fn-object/5
@@ -202,13 +230,88 @@ const isHost = (node) => node && node.$tag$ === Host;
  */
 const setAccessor = (elm, memberName, oldValue, newValue, isSvg, flags) => {
     if (oldValue !== newValue) {
-        memberName.toLowerCase();
+        let isProp = isMemberInElement(elm, memberName);
+        let ln = memberName.toLowerCase();
         if (memberName === 'class') {
             const classList = elm.classList;
             const oldClasses = parseClassList(oldValue);
             const newClasses = parseClassList(newValue);
             classList.remove(...oldClasses.filter((c) => c && !newClasses.includes(c)));
             classList.add(...newClasses.filter((c) => c && !oldClasses.includes(c)));
+        }
+        else if ((!isProp ) &&
+            memberName[0] === 'o' &&
+            memberName[1] === 'n') {
+            // Event Handlers
+            // so if the member name starts with "on" and the 3rd characters is
+            // a capital letter, and it's not already a member on the element,
+            // then we're assuming it's an event listener
+            if (memberName[2] === '-') {
+                // on- prefixed events
+                // allows to be explicit about the dom event to listen without any magic
+                // under the hood:
+                // <my-cmp on-click> // listens for "click"
+                // <my-cmp on-Click> // listens for "Click"
+                // <my-cmp on-ionChange> // listens for "ionChange"
+                // <my-cmp on-EVENTS> // listens for "EVENTS"
+                memberName = memberName.slice(3);
+            }
+            else if (isMemberInElement(win, ln)) {
+                // standard event
+                // the JSX attribute could have been "onMouseOver" and the
+                // member name "onmouseover" is on the window's prototype
+                // so let's add the listener "mouseover", which is all lowercased
+                memberName = ln.slice(2);
+            }
+            else {
+                // custom event
+                // the JSX attribute could have been "onMyCustomEvent"
+                // so let's trim off the "on" prefix and lowercase the first character
+                // and add the listener "myCustomEvent"
+                // except for the first character, we keep the event name case
+                memberName = ln[2] + memberName.slice(3);
+            }
+            if (oldValue) {
+                plt.rel(elm, memberName, oldValue, false);
+            }
+            if (newValue) {
+                plt.ael(elm, memberName, newValue, false);
+            }
+        }
+        else {
+            // Set property if it exists and it's not a SVG
+            const isComplex = isComplexType(newValue);
+            if ((isProp || (isComplex && newValue !== null)) && !isSvg) {
+                try {
+                    if (!elm.tagName.includes('-')) {
+                        let n = newValue == null ? '' : newValue;
+                        // Workaround for Safari, moving the <input> caret when re-assigning the same valued
+                        if (memberName === 'list') {
+                            isProp = false;
+                        }
+                        else if (oldValue == null || elm[memberName] != n) {
+                            elm[memberName] = n;
+                        }
+                    }
+                    else {
+                        elm[memberName] = newValue;
+                    }
+                }
+                catch (e) { }
+            }
+            if (newValue == null || newValue === false) {
+                if (newValue !== false || elm.getAttribute(memberName) === '') {
+                    {
+                        elm.removeAttribute(memberName);
+                    }
+                }
+            }
+            else if ((!isProp || flags & 4 /* isHost */ || isSvg) && !isComplex) {
+                newValue = newValue === true ? '' : newValue;
+                {
+                    elm.setAttribute(memberName, newValue);
+                }
+            }
         }
     }
 };
@@ -227,13 +330,13 @@ const updateElement = (oldVnode, newVnode, isSvgMode, memberName) => {
         // remove attributes no longer present on the vnode by setting them to undefined
         for (memberName in oldVnodeAttrs) {
             if (!(memberName in newVnodeAttrs)) {
-                setAccessor(elm, memberName, oldVnodeAttrs[memberName], undefined);
+                setAccessor(elm, memberName, oldVnodeAttrs[memberName], undefined, isSvgMode, newVnode.$flags$);
             }
         }
     }
     // add new & update changed attributes
     for (memberName in newVnodeAttrs) {
-        setAccessor(elm, memberName, oldVnodeAttrs[memberName], newVnodeAttrs[memberName]);
+        setAccessor(elm, memberName, oldVnodeAttrs[memberName], newVnodeAttrs[memberName], isSvgMode, newVnode.$flags$);
     }
 };
 const createElm = (oldParentVNode, newParentVNode, childIndex, parentElm) => {
@@ -247,11 +350,18 @@ const createElm = (oldParentVNode, newParentVNode, childIndex, parentElm) => {
         elm = newVNode.$elm$ = doc.createTextNode(newVNode.$text$);
     }
     else {
+        if (!isSvgMode) {
+            isSvgMode = newVNode.$tag$ === 'svg';
+        }
         // create element
-        elm = newVNode.$elm$ = (doc.createElement(newVNode.$tag$));
+        elm = newVNode.$elm$ = (doc.createElementNS(isSvgMode ? SVG_NS : HTML_NS, newVNode.$tag$)
+            );
+        if (isSvgMode && newVNode.$tag$ === 'foreignObject') {
+            isSvgMode = false;
+        }
         // add css classes, attrs, props, listeners, etc.
         {
-            updateElement(null, newVNode);
+            updateElement(null, newVNode, isSvgMode);
         }
         if (isDef(scopeId) && elm['s-si'] !== scopeId) {
             // if there is a scopeId and this is the initial render
@@ -267,6 +377,16 @@ const createElm = (oldParentVNode, newParentVNode, childIndex, parentElm) => {
                     // append our new node
                     elm.appendChild(childNode);
                 }
+            }
+        }
+        {
+            if (newVNode.$tag$ === 'svg') {
+                // Only reset the SVG context when we're exiting <svg> element
+                isSvgMode = false;
+            }
+            else if (elm.tagName === 'foreignObject') {
+                // Reenter SVG context when we're exiting <foreignObject> element
+                isSvgMode = true;
             }
         }
     }
@@ -375,15 +495,21 @@ const patch = (oldVNode, newVNode) => {
     const elm = (newVNode.$elm$ = oldVNode.$elm$);
     const oldChildren = oldVNode.$children$;
     const newChildren = newVNode.$children$;
+    const tag = newVNode.$tag$;
     const text = newVNode.$text$;
     if (text === null) {
+        {
+            // test if we're rendering an svg element, or still rendering nodes inside of one
+            // only add this to the when the compiler sees we're using an svg somewhere
+            isSvgMode = tag === 'svg' ? true : tag === 'foreignObject' ? false : isSvgMode;
+        }
         // element node
         {
             {
                 // either this is the first render of an element OR it's an update
                 // AND we already know it's possible it could have changed
                 // this updates the element's css classes, attrs, props, listeners, etc.
-                updateElement(oldVNode, newVNode);
+                updateElement(oldVNode, newVNode, isSvgMode);
             }
         }
         if (oldChildren !== null && newChildren !== null) {
@@ -402,6 +528,9 @@ const patch = (oldVNode, newVNode) => {
         else if (oldChildren !== null) {
             // no new child vnodes, but there are old child vnodes to remove
             removeVnodes(oldChildren, 0, oldChildren.length - 1);
+        }
+        if (isSvgMode && tag === 'svg') {
+            isSvgMode = false;
         }
     }
     else if (oldVNode.$text$ !== text) {
@@ -923,6 +1052,7 @@ const registerHost = (elm, cmpMeta) => {
     }
     return hostRefs.set(elm, hostRef);
 };
+const isMemberInElement = (elm, memberName) => memberName in elm;
 const consoleError = (e, el) => (0, console.error)(e, el);
 const cmpModules = /*@__PURE__*/ new Map();
 const loadModule = (cmpMeta, hostRef, hmrVersionId) => {
@@ -933,11 +1063,11 @@ const loadModule = (cmpMeta, hostRef, hmrVersionId) => {
     if (module) {
         return module[exportName];
     }
-    return import(
+    return Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(require(
     /* webpackInclude: /\.entry\.js$/ */
     /* webpackExclude: /\.system\.entry\.js$/ */
     /* webpackMode: "lazy" */
-    `./${bundleId}.entry.js${''}`).then((importedModule) => {
+    `./${bundleId}.entry.js${''}`)); }).then((importedModule) => {
         {
             cmpModules.set(bundleId, importedModule);
         }
@@ -988,4 +1118,7 @@ const flush = () => {
 const nextTick = /*@__PURE__*/ (cb) => promiseResolve().then(cb);
 const writeTask = /*@__PURE__*/ queueTask(queueDomWrites, true);
 
-export { bootstrapLazy as b, h, promiseResolve as p, registerInstance as r };
+exports.bootstrapLazy = bootstrapLazy;
+exports.h = h;
+exports.promiseResolve = promiseResolve;
+exports.registerInstance = registerInstance;

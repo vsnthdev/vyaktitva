@@ -1,1 +1,1 @@
-import{p as r,b as a}from"./p-07f1d438.js";(()=>{const a=import.meta.url,e={};return""!==a&&(e.resourcesUrl=new URL(".",a).href),r(e)})().then((r=>a([["p-1a9e0229",[[1,"v-header",{brand:[1]}]]]],r)));
+import{p as r,b as p}from"./p-24d33149.js";(()=>{const p=import.meta.url,b={};return""!==p&&(b.resourcesUrl=new URL(".",p).href),r(b)})().then((r=>p([["p-8b43cb0b",[[1,"v-header",{brand:[1],open:[32]}]]]],r)));
