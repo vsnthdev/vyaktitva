@@ -24,10 +24,10 @@
         "build": "npm run clean && stencil build",
         "clean": "rimraf www dist"
     },
-    "dependencies": {
-        "@stencil/core": "^2.11.0"
-    },
     "devDependencies": {
-        "rimraf": "^3.0.2"
+        "@stencil/core": "^2.11.0",
+        "@stencil/postcss": "^2.1.0",
+        "rimraf": "^3.0.2",
+        "tailwindcss": "^2.2.19"
     }
 }

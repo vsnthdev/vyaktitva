@@ -1,1 +1,0 @@
-import{r,h as e}from"./p-11afeb51.js";let s=class{constructor(e){r(this,e)}render(){return e("header",null,e("h2",null,this.brand))}};export{s as v_header}

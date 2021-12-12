@@ -1,1 +1,10 @@
-<!doctype html><html lang="en"><head> <title></title> <!-- load vyaktitva --> <script type="module" src="/build/vyaktitva.esm.js" data-stencil data-resources-url="/build/" data-stencil-namespace="vyaktitva"></script> <script nomodule="" src="/build/vyaktitva.js" data-stencil></script> </head> <body> <v-header brand="vyaktitva"></v-header> </body></html>
+<!doctype html><html lang="en"><head> <title></title> <link rel="stylesheet" href="https://try.vsnth.dev/content-cards/fonts.css"> <!-- load vyaktitva --> <script type="module" src="/build/vyaktitva.esm.js" data-stencil></script> <script nomodule="" src="/build/vyaktitva.js" data-stencil></script> </head> <body> <v-header brand="vyaktitva"></v-header> <script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  // auto-unregister service worker during dev mode
+  navigator.serviceWorker.getRegistration().then(function(registration) {
+  if (registration) {
+    registration.unregister().then(function() { location.reload(true) });
+  }
+  });
+}
+</script></body></html>

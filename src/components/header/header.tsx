@@ -7,6 +7,8 @@ import { Component, Prop, h } from "@stencil/core";
 
 @Component({
     tag: 'v-header',
+    styleUrl: 'header.css',
+    shadow: true
 })
 export class Header {
     @Prop() brand: string
@@ -14,7 +16,7 @@ export class Header {
     render() {
         return (
             <header>
-                <h2>{this.brand}</h2>
+                <h2 class="font-body">{this.brand}</h2>
             </header>
         )
     }
