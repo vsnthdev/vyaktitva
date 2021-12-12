@@ -4,6 +4,7 @@ import tailwindcss from 'tailwindcss';
 
 export const config: Config = {
     namespace: 'vyaktitva',
+    globalStyle: 'src/index.css',
     devServer: {
         reloadStrategy: 'pageReload'
     },

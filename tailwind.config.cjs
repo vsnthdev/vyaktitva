@@ -1,5 +1,8 @@
 module.exports = {
-    content: [],
+    content: [
+        './src/**/*.tsx',
+        './src/index.html'
+    ],
     theme: {
         fontFamily: {
             body: ['Basically A Sans Serif']
