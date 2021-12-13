@@ -6,11 +6,21 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface VFooter {
+        "brand": string;
+        "theme": string;
+    }
     interface VHeader {
         "brand": string;
     }
 }
 declare global {
+    interface HTMLVFooterElement extends Components.VFooter, HTMLStencilElement {
+    }
+    var HTMLVFooterElement: {
+        prototype: HTMLVFooterElement;
+        new (): HTMLVFooterElement;
+    };
     interface HTMLVHeaderElement extends Components.VHeader, HTMLStencilElement {
     }
     var HTMLVHeaderElement: {
@@ -18,14 +28,20 @@ declare global {
         new (): HTMLVHeaderElement;
     };
     interface HTMLElementTagNameMap {
+        "v-footer": HTMLVFooterElement;
         "v-header": HTMLVHeaderElement;
     }
 }
 declare namespace LocalJSX {
+    interface VFooter {
+        "brand"?: string;
+        "theme"?: string;
+    }
     interface VHeader {
         "brand"?: string;
     }
     interface IntrinsicElements {
+        "v-footer": VFooter;
         "v-header": VHeader;
     }
 }
@@ -33,6 +49,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "v-footer": LocalJSX.VFooter & JSXBase.HTMLAttributes<HTMLVFooterElement>;
             "v-header": LocalJSX.VHeader & JSXBase.HTMLAttributes<HTMLVHeaderElement>;
         }
     }

@@ -1,6 +1,6 @@
 import { Config } from '@stencil/core'
 import { postcss } from '@stencil/postcss'
-import tailwindcss from 'tailwindcss';
+import tailwindcss from 'tailwindcss'
 
 export const config: Config = {
     namespace: 'vyaktitva',

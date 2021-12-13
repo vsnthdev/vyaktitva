@@ -1,5 +1,6 @@
 {
   "entries": [
+    "./components/footer/footer.js",
     "./components/header/header.js"
   ],
   "compiler": {
