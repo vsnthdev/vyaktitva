@@ -5,10 +5,19 @@
 import { Component, Prop, State, h } from "@stencil/core";
 export class Header {
   constructor() {
+    this.theme = 'plain';
     this.open = false;
+    this.getTheme = (border) => {
+      if (this.theme == 'default') {
+        return " bg-white text-gray-700 " + border;
+      }
+      else {
+        return "";
+      }
+    };
   }
   render() {
-    return (h("header", { class: "font-body" },
+    return (h("header", { class: "font-body " + this.getTheme("border-b-2") },
       h("div", { class: "container mx-auto px-7 py-7 flex justify-between font-semibold" },
         h("div", { class: "w-full flex" },
           h("span", { class: "text-lg" }, this.brand)),
@@ -16,7 +25,7 @@ export class Header {
           h("svg", { xmlns: "http://www.w3.org/2000/svg", class: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" },
             h("path", { "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-width": "2", d: "M4 6h16M4 12h16M4 18h16" }))),
         h("nav", { onClick: () => { this.open = false; }, class: "absolute inset-0 pt-16 pr-10 md:static md:p-0 md:w-full " + (this.open ? "" : "pointer-events-none") },
-          h("div", { class: "bg-white w-52 p-7 ml-auto shadow-lg rounded-md flex flex-col space-y-4 pointer-events-auto transform-gpu transition-all md:bg-transparent md:shadow-none md:flex-row md:p-0 md:w-full md:space-y-0 md:space-x-6 md:justify-end md:items-center md:rounded-none md:opacity-100 md:transform-none md:h-full lg:justify-center " + (this.open ? "opacity-100" : "opacity-0 translate-x-2 -translate-y-1") },
+          h("div", { class: "bg-white w-52 p-7 ml-auto shadow-lg rounded-md flex flex-col space-y-4 pointer-events-auto transform-gpu transition-all md:bg-transparent md:shadow-none md:flex-row md:border-0 md:p-0 md:w-full md:space-y-0 md:space-x-6 md:justify-end md:items-center md:rounded-none md:opacity-100 md:transform-none md:h-full lg:justify-center " + (this.open ? "opacity-100" : "opacity-0 translate-x-2 -translate-y-1") + this.getTheme("border-2") },
             h("a", { href: "https://vsnth.dev" }, "Home"),
             h("a", { href: "https://vasanthdeveloper.com" }, "Blog"),
             h("a", { href: "https://vsnth.dev/projects" }, "Projects"),
@@ -26,7 +35,7 @@ export class Header {
             h("svg", { class: "w-4 h-4", version: "1.1", viewBox: "0 0 512 512", xmlns: "http://www.w3.org/2000/svg" },
               h("path", { fill: "currentColor", d: "M161.014,464.013c193.208,0 298.885,-160.071 298.885,-298.885c0,-4.546 0,-9.072 -0.307,-13.578c20.558,-14.871 38.305,-33.282 52.408,-54.374c-19.171,8.495 -39.51,14.065 -60.334,16.527c21.924,-13.124 38.343,-33.782 46.182,-58.102c-20.619,12.235 -43.18,20.859 -66.703,25.498c-19.862,-21.121 -47.602,-33.112 -76.593,-33.112c-57.682,0 -105.145,47.464 -105.145,105.144c0,8.002 0.914,15.979 2.722,23.773c-84.418,-4.231 -163.18,-44.161 -216.494,-109.752c-27.724,47.726 -13.379,109.576 32.522,140.226c-16.715,-0.495 -33.071,-5.005 -47.677,-13.148l0,1.331c0.014,49.814 35.447,93.111 84.275,102.974c-15.464,4.217 -31.693,4.833 -47.431,1.802c13.727,42.685 53.311,72.108 98.14,72.95c-37.19,29.227 -83.157,45.103 -130.458,45.056c-8.358,-0.016 -16.708,-0.522 -25.006,-1.516c48.034,30.825 103.94,47.18 161.014,47.104" }))),
           h("a", { href: "https://vas.cx/youtube", target: "_blank", rel: "noopener" },
-            h("svg", { class: "w-4 h-4", version: "1.1", viewBox: "0 0 512 512", xmlns: "http://www.w3.org/2000/svg" },
+            h("svg", { class: "w-4 h-4", fill: "currentColor", version: "1.1", viewBox: "0 0 512 512", xmlns: "http://www.w3.org/2000/svg" },
               h("path", { d: "M501.303,132.765c-5.887,-22.03 -23.235,-39.377 -45.265,-45.265c-39.932,-10.7 -200.038,-10.7 -200.038,-10.7c0,0 -160.107,0 -200.039,10.7c-22.026,5.888 -39.377,23.235 -45.264,45.265c-10.697,39.928 -10.697,123.238 -10.697,123.238c0,0 0,83.308 10.697,123.232c5.887,22.03 23.238,39.382 45.264,45.269c39.932,10.696 200.039,10.696 200.039,10.696c0,0 160.106,0 200.038,-10.696c22.03,-5.887 39.378,-23.239 45.265,-45.269c10.696,-39.924 10.696,-123.232 10.696,-123.232c0,0 0,-83.31 -10.696,-123.238Zm-296.506,200.039l0,-153.603l133.019,76.802l-133.019,76.801Z" }))),
           h("a", { href: "https://vas.cx/discord", target: "_blank", rel: "noopener" },
             h("svg", { class: "h-4 w-4", fill: "currentColor", viewBox: "0 0 71 55", xmlns: "http://www.w3.org/2000/svg" },
@@ -57,6 +66,24 @@ export class Header {
       },
       "attribute": "brand",
       "reflect": false
+    },
+    "theme": {
+      "type": "string",
+      "mutable": false,
+      "complexType": {
+        "original": "string",
+        "resolved": "string",
+        "references": {}
+      },
+      "required": false,
+      "optional": false,
+      "docs": {
+        "tags": [],
+        "text": ""
+      },
+      "attribute": "theme",
+      "reflect": false,
+      "defaultValue": "'plain'"
     }
   }; }
   static get states() { return {

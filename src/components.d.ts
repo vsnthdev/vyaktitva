@@ -12,6 +12,7 @@ export namespace Components {
     }
     interface VHeader {
         "brand": string;
+        "theme": string;
     }
 }
 declare global {
@@ -39,6 +40,7 @@ declare namespace LocalJSX {
     }
     interface VHeader {
         "brand"?: string;
+        "theme"?: string;
     }
     interface IntrinsicElements {
         "v-footer": VFooter;
