@@ -7,8 +7,7 @@ import { Component, Prop, State, h } from "@stencil/core"
 
 @Component({
     tag: 'v-header',
-    styleUrl: '../../index.css',
-    shadow: true
+    styleUrl: '../../index.css'
 })
 export class Header {
     @Prop() brand: string
