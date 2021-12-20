@@ -8,12 +8,12 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface VFooter {
         "brand": string;
-        "theme": string;
+        "variant": string;
     }
     interface VHeader {
         "brand": string;
         "shadow": boolean;
-        "theme": string;
+        "variant": string;
     }
     interface VSubHeader {
         "brand": string;
@@ -49,12 +49,12 @@ declare global {
 declare namespace LocalJSX {
     interface VFooter {
         "brand"?: string;
-        "theme"?: string;
+        "variant"?: string;
     }
     interface VHeader {
         "brand"?: string;
         "shadow"?: boolean;
-        "theme"?: string;
+        "variant"?: string;
     }
     interface VSubHeader {
         "brand"?: string;

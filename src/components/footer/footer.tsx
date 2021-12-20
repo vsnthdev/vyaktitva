@@ -4,6 +4,7 @@
  */
 
 import { Component, Prop, h } from "@stencil/core"
+import { join, getTheme } from '../../util/ui';
 
 @Component({
     tag: 'v-footer',
@@ -11,19 +12,20 @@ import { Component, Prop, h } from "@stencil/core"
 })
 export class Footer {
     @Prop() brand: string
-    @Prop() theme: string = "plain"
+    @Prop() variant: string
 
-    getTheme = () => {
-        if (this.theme == 'default') {
-            return "bg-white text-gray-700 border-t-2"
-        } else {
-            return ""
+    variants: Object = {
+        footer: {
+            default: 'bg-white text-gray-700 border-t-2'
         }
     }
 
     render() {
         return (
-            <footer class={"py-10 px-7 " + this.getTheme()}>
+            <footer class={join([
+                "py-10 px-7",
+                getTheme(this.variant, this.variants, 'footer')
+            ])}>
                 <div class="container mx-auto font-body font-semibold">
                     <div class="w-full flex mb-3">
                         <span class="text-2xl">{this.brand}</span>

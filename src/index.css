@@ -13,7 +13,3 @@
 *::-webkit-scrollbar {
     display: none;
 }
-
-body {
-    @apply bg-slate-100;
-}

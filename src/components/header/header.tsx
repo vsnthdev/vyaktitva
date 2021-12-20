@@ -4,6 +4,7 @@
  */
 
 import { Component, Prop, State, h } from "@stencil/core"
+import { join, getTheme } from '../../util/ui'
 
 @Component({
     tag: 'v-header',
@@ -11,22 +12,23 @@ import { Component, Prop, State, h } from "@stencil/core"
 })
 export class Header {
     @Prop() brand: string
-    @Prop() theme: string = 'plain'
+    @Prop() variant: string
     @Prop() shadow: boolean = false
     
     @State() open: boolean = false
 
-    getTheme = (border: string) => {
-        if (this.theme == 'default') {
-            return " bg-white text-gray-700 " + border
-        } else {
-            return ""
+    variants: Object = {
+        header: {
+            default: `bg-white text-gray-700 ${this.shadow ? 'shadow-lg' : 'border-b-2'}`
+        },
+        nav: {
+            default: 'text-gray-700 border-2'
         }
     }
 
     render() {
         return (
-            <header class={"font-body " + this.getTheme(this.shadow ? 'shadow-xl' : "border-b-2") }>
+            <header class={join(["font-body", getTheme(this.variant, this.variants, 'header')])}>
                 <div class="container mx-auto px-7 py-7 flex justify-between font-semibold">
                     <div class="w-full flex">
                         <span class="text-lg">{this.brand}</span>
@@ -40,8 +42,15 @@ export class Header {
                     </button>
 
                     {/* navigation */}
-                    <nav onClick={() => { this.open = false }} class={"absolute inset-0 pt-16 pr-10 md:static md:p-0 md:w-full " + (this.open ? "" : "pointer-events-none")}>
-                        <div class={"bg-white w-52 p-7 ml-auto shadow-lg rounded-md flex flex-col space-y-4 pointer-events-auto transform-gpu transition-all md:bg-transparent md:shadow-none md:flex-row md:border-0 md:p-0 md:w-full md:space-y-0 md:space-x-6 md:justify-end md:items-center md:rounded-none md:opacity-100 md:transform-none md:h-full lg:justify-center " + (this.open ? "opacity-100" : "opacity-0 translate-x-2 -translate-y-1") + this.getTheme("border-2")}>
+                    <nav onClick={() => { this.open = false }} class={join([
+                        "absolute inset-0 pt-16 pr-10 md:static md:p-0 md:w-full",
+                        (this.open ? "" : "pointer-events-none")
+                    ])}>
+                        <div class={join([
+                            "bg-white w-52 p-7 ml-auto shadow-lg rounded-md flex flex-col space-y-4 pointer-events-auto transform-gpu transition-all md:bg-transparent md:shadow-none md:flex-row md:border-0 md:p-0 md:w-full md:space-y-0 md:space-x-6 md:justify-end md:items-center md:rounded-none md:opacity-100 md:transform-none md:h-full lg:justify-center",
+                            (this.open ? "opacity-100" : "opacity-0 translate-x-2 -translate-y-1"),
+                            getTheme(this.variant, this.variants, 'nav')
+                        ])}>
                             <a href="https://vsnth.dev">Home</a>
                             <a href="https://vasanthdeveloper.com">Blog</a>
                             <a href="https://vsnth.dev/projects">Projects</a>
