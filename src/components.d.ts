@@ -12,6 +12,7 @@ export namespace Components {
     }
     interface VHeader {
         "brand": string;
+        "shadow": boolean;
         "theme": string;
     }
 }
@@ -40,6 +41,7 @@ declare namespace LocalJSX {
     }
     interface VHeader {
         "brand"?: string;
+        "shadow"?: boolean;
         "theme"?: string;
     }
     interface IntrinsicElements {

@@ -12,6 +12,7 @@ import { Component, Prop, State, h } from "@stencil/core"
 export class Header {
     @Prop() brand: string
     @Prop() theme: string = 'plain'
+    @Prop() shadow: boolean = false
     
     @State() open: boolean = false
 
@@ -25,7 +26,7 @@ export class Header {
 
     render() {
         return (
-            <header class={"font-body " + this.getTheme("border-b-2") }>
+            <header class={"font-body " + this.getTheme(this.shadow ? 'shadow-xl' : "border-b-2") }>
                 <div class="container mx-auto px-7 py-7 flex justify-between font-semibold">
                     <div class="w-full flex">
                         <span class="text-lg">{this.brand}</span>
