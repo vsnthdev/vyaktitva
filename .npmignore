@@ -1,0 +1,4 @@
+src/
+www/
+tsconfig.json
+!dist/
