@@ -16,8 +16,14 @@
         <script nomodule src="/build/vyaktitva.js"></script>
     </head>
 
-    <body class="h-screen flex flex-col">
-        <v-header brand="vyaktitva" theme="default"></v-header>
+    <body class="h-screen flex flex-col" style="height: 200vh;">
+        <v-header brand="vyaktitva"></v-header>
+        <v-sub-header brand="vyaktitva" class="sticky top-0">
+            <div class="flex space-x-4">
+                <a href="#">hello</a>
+                <a href="#">world</a>
+            </div>
+        </v-sub-header>
         <v-footer brand="vyaktitva" class="mt-auto" theme="default"></v-footer>
     </body>
 </html>

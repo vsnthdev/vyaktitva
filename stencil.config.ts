@@ -10,7 +10,7 @@ export const config: Config = {
     },
     plugins: [
         postcss({
-            plugins: [tailwindcss('tailwind.config.cjs')]
+            plugins: [tailwindcss]
         })
     ],
     outputTargets: [

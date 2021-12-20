@@ -15,6 +15,11 @@ export namespace Components {
         "shadow": boolean;
         "theme": string;
     }
+    interface VSubHeader {
+        "brand": string;
+        "shadow": boolean;
+        "theme": string;
+    }
 }
 declare global {
     interface HTMLVFooterElement extends Components.VFooter, HTMLStencilElement {
@@ -29,9 +34,16 @@ declare global {
         prototype: HTMLVHeaderElement;
         new (): HTMLVHeaderElement;
     };
+    interface HTMLVSubHeaderElement extends Components.VSubHeader, HTMLStencilElement {
+    }
+    var HTMLVSubHeaderElement: {
+        prototype: HTMLVSubHeaderElement;
+        new (): HTMLVSubHeaderElement;
+    };
     interface HTMLElementTagNameMap {
         "v-footer": HTMLVFooterElement;
         "v-header": HTMLVHeaderElement;
+        "v-sub-header": HTMLVSubHeaderElement;
     }
 }
 declare namespace LocalJSX {
@@ -44,9 +56,15 @@ declare namespace LocalJSX {
         "shadow"?: boolean;
         "theme"?: string;
     }
+    interface VSubHeader {
+        "brand"?: string;
+        "shadow"?: boolean;
+        "theme"?: string;
+    }
     interface IntrinsicElements {
         "v-footer": VFooter;
         "v-header": VHeader;
+        "v-sub-header": VSubHeader;
     }
 }
 export { LocalJSX as JSX };
@@ -55,6 +73,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "v-footer": LocalJSX.VFooter & JSXBase.HTMLAttributes<HTMLVFooterElement>;
             "v-header": LocalJSX.VHeader & JSXBase.HTMLAttributes<HTMLVHeaderElement>;
+            "v-sub-header": LocalJSX.VSubHeader & JSXBase.HTMLAttributes<HTMLVSubHeaderElement>;
         }
     }
 }
