@@ -1,1 +1,0 @@
-import{p as e,b as r}from"./p-8d459654.js";(()=>{const r=import.meta.url,o={};return""!==r&&(o.resourcesUrl=new URL(".",r).href),e(o)})().then((e=>r([["p-26e08b74",[[0,"v-footer",{brand:[1],theme:[1]}],[0,"v-header",{brand:[1],theme:[1],open:[32]}]]]],e)));
