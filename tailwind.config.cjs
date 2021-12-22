@@ -10,11 +10,15 @@ module.exports = {
         fontFamily: {
             body: ['Basically A Sans Serif']
         },
-        extend: {
+        colors: {
+            gray: colors.slate,
             slate: colors.slate,
+            zinc: colors.zinc,
             transparent: 'transparent',
+            inherit: 'inherit',
+            white: '#FFFFFF',
             brand: '#006cff'
-        },
+        }
     },
     plugins: [],
 }

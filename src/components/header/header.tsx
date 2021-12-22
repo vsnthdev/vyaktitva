@@ -3,8 +3,9 @@
  *  Created On 12 December 2021
  */
 
-import { Component, Prop, State, h } from "@stencil/core"
-import { join, getTheme } from '../../util/ui'
+import { Component, Element, Prop, State, h } from "@stencil/core"
+import { join } from '../../util/ui'
+import { throttle } from 'lodash';
 
 @Component({
     tag: 'v-header',
@@ -13,25 +14,55 @@ import { join, getTheme } from '../../util/ui'
 export class Header {
     @Prop() brand: string
     @Prop() variant: string
-    @Prop() shadow: boolean = false
     
     @State() open: boolean = false
+    @State() animate: boolean = false
 
-    variants: Object = {
-        header: {
-            default: `bg-white text-gray-700 ${this.shadow ? 'shadow-lg' : 'border-b-2'}`
+    @Element() private element: HTMLElement;
+    
+    // a function that will close the sidebar
+    close = () => {this.open = false}
+
+    // decides whether to animate or not depending
+    // on whether we're on mobile dimensions
+    shouldAnimate = () => window.innerWidth < 750
+
+    // a throttled function that will
+    // close the sidebar on while resizing
+    // and remove animations for glitches
+    onResize = throttle(
+        () => {
+            this.close()
+            this.animate = this.shouldAnimate()
+
+            // span the absolute parent div of nav for full height of the document
+            this.element.querySelector('nav').parentElement.setAttribute('style', `height: ${
+                document.body.scrollHeight
+            }px;`)
         },
-        nav: {
-            default: 'text-gray-700 border-2'
+        500,
+        {
+            leading: true,
+            trailing: true
         }
+    )
+
+    componentWillLoad() {
+        this.onResize()
+    }
+
+    componentDidLoad() {
+        // when scrolling automatically hide the navbar
+        document.addEventListener('scroll', this.close)
+        window.addEventListener('resize', this.onResize)
     }
 
     render() {
         return (
-            <header class={join(["font-body", getTheme(this.variant, this.variants, 'header')])}>
-                <div class="container mx-auto px-7 py-7 flex justify-between font-semibold">
+            <header class={"font-body"}>
+                <div class="bg-inherit container mx-auto px-7 py-7 flex justify-between font-semibold">
                     <div class="w-full flex">
-                        <span class="text-lg">{this.brand}</span>
+                        <span class="text-lg cursor-pointer select-none" onClick={() => document.querySelector('html').classList.toggle('dark')}>{this.brand}</span>
                     </div>
 
                     {/* mobile navigation button */}
@@ -42,21 +73,30 @@ export class Header {
                     </button>
 
                     {/* navigation */}
-                    <nav onClick={() => { this.open = false }} class={join([
-                        "absolute inset-0 pt-16 pr-10 md:static md:p-0 md:w-full",
+                    <div onClick={() => { this.open = false }} class={join([
+                        "absolute h-full inset-0 flex flex-col items-end overflow-x-hidden",
+                        "md:static md:w-full",
                         (this.open ? "" : "pointer-events-none")
                     ])}>
-                        <div class={join([
-                            "bg-white w-52 p-7 ml-auto shadow-lg rounded-md flex flex-col space-y-4 pointer-events-auto transform-gpu transition-all md:bg-transparent md:shadow-none md:flex-row md:border-0 md:p-0 md:w-full md:space-y-0 md:space-x-6 md:justify-end md:items-center md:rounded-none md:opacity-100 md:transform-none md:h-full lg:justify-center",
-                            (this.open ? "opacity-100" : "opacity-0 translate-x-2 -translate-y-1"),
-                            getTheme(this.variant, this.variants, 'nav')
+                        <nav class={join([
+                            // mobile styles
+                            "bg-white h-full w-56 px-5 py-10 flex flex-col space-y-3 duration-200",
+
+                            // desktop styles
+                            "md:bg-transparent md:translate-x-0 md:opacity-100 md:flex-row md:p-0 md:w-full md:items-center md:justify-center md:space-y-0 md:space-x-6",
+
+                            // open or close styles
+                            (this.open ? "opacity-100 translate-x-0" : "opacity-0 translate-x-56"),
+
+                            // whether to animate or not
+                            (this.animate ? "transition-all" : "transition-none")
                         ])}>
-                            <a href="https://vsnth.dev">Home</a>
-                            <a href="https://vasanthdeveloper.com">Blog</a>
-                            <a href="https://vsnth.dev/projects">Projects</a>
-                            <a href="https://vsnth.dev/about">About</a>
-                        </div>
-                    </nav>
+                            <a href="https://vsnth.dev" class={"py-2 px-3 rounded-md md:p-0"}>Home</a>
+                            <a href="https://vasanthdeveloper.com" class={"py-2 px-3 rounded-md md:p-0"}>Blog</a>
+                            <a href="https://vas.cx/projects" class={"py-2 px-3 rounded-md md:p-0"}>Projects</a>
+                            <a href="https://vas.cx/about" class={"py-2 px-3 rounded-md md:p-0"}>About</a>
+                        </nav>
+                    </div>
 
                     {/* social media */}
                     <div class="w-full hidden justify-end items-center space-x-4 lg:flex">

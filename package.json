@@ -27,7 +27,9 @@
     "devDependencies": {
         "@stencil/core": "^2.12.0",
         "@stencil/postcss": "^2.1.0",
+        "@types/lodash": "^4.14.178",
         "cross-env": "^7.0.3",
+        "lodash": "^4.17.21",
         "rimraf": "^3.0.2",
         "tailwindcss": "^3.0.7"
     }
