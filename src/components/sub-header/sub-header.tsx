@@ -16,7 +16,7 @@ export class SubHeader {
 
     getTheme = (border: string) => {
         if (this.theme == 'default') {
-            return " bg-white text-gray-700 " + border
+            return " bg-white text-slate-700 " + border
         } else {
             return ""
         }

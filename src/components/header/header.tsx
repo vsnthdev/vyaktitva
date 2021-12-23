@@ -4,8 +4,8 @@
  */
 
 import { Component, Element, Prop, State, h } from "@stencil/core"
-import { join } from '../../util/ui'
-import { throttle } from 'lodash';
+import { join, isHydrated } from '../../util/ui'
+import { DebouncedFunc, throttle } from 'lodash';
 
 @Component({
     tag: 'v-header',
@@ -14,6 +14,7 @@ import { throttle } from 'lodash';
 export class Header {
     @Prop() brand: string
     @Prop() variant: string
+    @Prop() navstyle: boolean = true
     
     @State() open: boolean = false
     @State() animate: boolean = false
@@ -21,24 +22,32 @@ export class Header {
     @Element() private element: HTMLElement;
     
     // a function that will close the sidebar
-    close = () => {this.open = false}
+    close: () => void = () => { this.open = false }
 
     // decides whether to animate or not depending
     // on whether we're on mobile dimensions
-    shouldAnimate = () => window.innerWidth < 750
+    shouldAnimate: () => boolean = () => window.innerWidth < 750
+
+    // span the absolute parent div of nav for full height of the document
+    applyNavSize = () => {
+        // just skip if not hydrated yet
+        if (isHydrated(this.element) == false) return
+
+        this.element.querySelector('nav').parentElement.setAttribute('style', `height: ${
+            document.body.scrollHeight
+        }px;`)
+    }
 
     // a throttled function that will
     // close the sidebar on while resizing
     // and remove animations for glitches
-    onResize = throttle(
+    onResize: DebouncedFunc<() => void> = throttle(
         () => {
             this.close()
             this.animate = this.shouldAnimate()
 
             // span the absolute parent div of nav for full height of the document
-            this.element.querySelector('nav').parentElement.setAttribute('style', `height: ${
-                document.body.scrollHeight
-            }px;`)
+            this.applyNavSize()
         },
         500,
         {
@@ -47,11 +56,38 @@ export class Header {
         }
     )
 
+    applyNavStyle: () => void = () => {
+        if (this.navstyle == false) return
+        
+        const computedStyle = getComputedStyle(this.element)
+        let lastFrameBackground
+        let lastFrameColor
+
+        const animate = () => {
+            if (computedStyle.background !== lastFrameBackground || computedStyle.color !== lastFrameColor) {
+                lastFrameBackground = computedStyle.background
+                lastFrameColor = computedStyle.color
+
+                const nav = this.element.querySelector('nav')
+                nav.style.backgroundColor = computedStyle.backgroundColor
+                nav.style.color = computedStyle.color
+            }
+
+            requestAnimationFrame(animate)
+        }
+
+        animate()
+    }
+
     componentWillLoad() {
         this.onResize()
     }
 
     componentDidLoad() {
+        // apply the navigation styles if configured
+        this.applyNavStyle()
+        this.applyNavSize()
+
         // when scrolling automatically hide the navbar
         document.addEventListener('scroll', this.close)
         window.addEventListener('resize', this.onResize)
@@ -80,7 +116,7 @@ export class Header {
                     ])}>
                         <nav class={join([
                             // mobile styles
-                            "bg-white h-full w-56 px-5 py-10 flex flex-col space-y-3 duration-200",
+                            "h-full w-56 px-5 py-10 flex flex-col space-y-3 duration-200",
 
                             // desktop styles
                             "md:bg-transparent md:translate-x-0 md:opacity-100 md:flex-row md:p-0 md:w-full md:items-center md:justify-center md:space-y-0 md:space-x-6",

@@ -11,9 +11,7 @@ module.exports = {
             body: ['Basically A Sans Serif']
         },
         colors: {
-            gray: colors.slate,
             slate: colors.slate,
-            zinc: colors.zinc,
             transparent: 'transparent',
             inherit: 'inherit',
             white: '#FFFFFF',

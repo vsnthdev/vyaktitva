@@ -12,6 +12,7 @@ export namespace Components {
     }
     interface VHeader {
         "brand": string;
+        "navstyle": boolean;
         "variant": string;
     }
     interface VSubHeader {
@@ -52,6 +53,7 @@ declare namespace LocalJSX {
     }
     interface VHeader {
         "brand"?: string;
+        "navstyle"?: boolean;
         "variant"?: string;
     }
     interface VSubHeader {

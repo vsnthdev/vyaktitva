@@ -16,7 +16,7 @@ export class Footer {
 
     variants: Object = {
         footer: {
-            default: 'bg-white text-gray-700 border-t-2'
+            default: 'bg-white text-slate-700 border-t-2'
         }
     }
 
