@@ -13,7 +13,6 @@ import { DebouncedFunc, throttle } from 'lodash';
 })
 export class Header {
     @Prop() brand: string
-    @Prop() variant: string
     @Prop() navstyle: boolean = true
     
     @State() open: boolean = false
@@ -95,10 +94,10 @@ export class Header {
 
     render() {
         return (
-            <header class={"font-body"}>
-                <div class="bg-inherit container mx-auto px-7 py-7 flex justify-between font-semibold">
+            <header class={"font-body select-none"}>
+                <div class="bg-inherit container mx-auto px-7 py-7 flex justify-between items-center font-semibold">
                     <div class="w-full flex">
-                        <span class="text-lg cursor-pointer select-none" onClick={() => document.querySelector('html').classList.toggle('dark')}>{this.brand}</span>
+                        <span class="text-lg cursor-pointer" onClick={() => document.querySelector('html').classList.toggle('dark')}>{this.brand}</span>
                     </div>
 
                     {/* mobile navigation button */}
@@ -112,7 +111,7 @@ export class Header {
                     <div onClick={() => { this.open = false }} class={join([
                         "absolute h-full inset-0 flex flex-col items-end overflow-x-hidden",
                         "md:static md:w-full",
-                        (this.open ? "" : "pointer-events-none")
+                        (this.open ? "" : "pointer-events-none md:pointer-events-auto")
                     ])}>
                         <nav class={join([
                             // mobile styles
