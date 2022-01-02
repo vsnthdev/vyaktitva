@@ -1,6 +1,9 @@
+@import url('./assets/css/fonts.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :host {
     display: block;

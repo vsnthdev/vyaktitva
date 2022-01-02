@@ -16,7 +16,14 @@ export const config: Config = {
     outputTargets: [
         {
             type: 'www',
-            serviceWorker: false
+            serviceWorker: false,
+            copy: [
+                {
+                    src: 'assets',
+                    dest: 'assets',
+                    warn: true
+                }
+            ]
         },
         {
             type: 'dist'
