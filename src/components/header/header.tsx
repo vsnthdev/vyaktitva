@@ -78,6 +78,23 @@ export class Header {
         animate()
     }
 
+    toggleTheme: () => void = () => {
+        const html = document.querySelector('html')
+        const themeColor = document.querySelector('meta[name=theme-color]')
+
+        console.log(themeColor)
+
+        if (html.classList.contains('dark')) {
+            // switch to light theme
+            html.classList.remove('dark')
+            themeColor.setAttribute('content', '#ffffff')
+        } else {
+            // switch to dark theme
+            html.classList.add('dark')
+            themeColor.setAttribute('content', '#1e293b')
+        }
+    }
+
     componentWillLoad() {
         this.onResize()
     }
@@ -97,7 +114,7 @@ export class Header {
             <header class={"font-body select-none"}>
                 <div class="bg-inherit container mx-auto px-7 py-7 flex justify-between items-center font-semibold">
                     <div class="w-full flex">
-                        <span class="text-lg cursor-pointer" onClick={() => document.querySelector('html').classList.toggle('dark')}>{this.brand}</span>
+                        <span class="text-lg cursor-pointer" onClick={this.toggleTheme}>{this.brand}</span>
                     </div>
 
                     {/* mobile navigation button */}
