@@ -20,11 +20,11 @@
         "url": "https://github.com/vsnthdev/vyaktitva.git"
     },
     "engines": {
-        "node": ">=17.7.1"
+        "node": "14.x"
     },
     "scripts": {
         "dev": "stencil build --dev --watch --serve",
-        "build": "npm run clean && cross-env NODE_ENV=production stencil build",
+        "build": "npm run clean --silent && cross-env NODE_ENV=production stencil build",
         "clean": "rimraf www dist"
     },
     "devDependencies": {
