@@ -19,6 +19,9 @@
         "type": "git",
         "url": "https://github.com/vsnthdev/vyaktitva.git"
     },
+    "engines": {
+        "node": ">=17.7.1"
+    },
     "scripts": {
         "dev": "stencil build --dev --watch --serve",
         "build": "npm run clean && cross-env NODE_ENV=production stencil build",
