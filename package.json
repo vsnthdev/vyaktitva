@@ -23,7 +23,8 @@
         "node": "14.x"
     },
     "scripts": {
-        "dev": "stencil build --dev --watch --serve",
+        "dev:stencil": "stencil build --dev --watch --serve",
+        "dev:tailwind": "tailwind -w -c tailwind.config.cjs -i src/index.css -o www/build/vyaktitva.css",
         "build": "npm run clean --silent && cross-env NODE_ENV=production stencil build",
         "clean": "rimraf www dist"
     },
