@@ -15,16 +15,34 @@ export class Footer {
     render() {
         return (
             <footer class={"py-10 px-7"}>
-                <div class="container mx-auto font-body font-semibold">
-                    <div class="w-full flex mb-3">
-                        <span class="text-2xl">{this.brand}</span>
+                <div class="flex flex-col container mx-auto font-body space-y-6 md:space-y-0 md:flex-row md:space-x-12">
+                    {/* first section */}
+                    <div class="flex flex-col">
+                        {/* section header */}
+                        <div class="w-full flex mb-3">
+                            <span class="text-2xl font-semibold">{this.brand}</span>
+                        </div>
+
+                        {/* navigation links */}
+                        <nav class="flex space-x-4 font-semibold">
+                            <a href="https://vasanthdeveloper.com/privacy">Privacy Policy</a>
+                            <a href="https://vasanthdeveloper.com/contact">Contact Us</a>
+                        </nav>
                     </div>
 
-                    {/* footer navigation */}
-                    <nav class="flex space-x-4">
-                        <a href="https://vasanthdeveloper.com/privacy">Privacy Policy</a>
-                        <a href="https://vasanthdeveloper.com/contact">Contact Us</a>
-                    </nav>
+                    {/* projects section */}
+                    <div class="flex flex-col justify-end">
+                        {/* section header */}
+                        <div class="w-full flex mb-3">
+                            <span class="text-xl font-medium">Additional Links</span>
+                        </div>
+
+                        {/* navigation links */}
+                        <nav class="flex font-medium">
+                            <a class="mr-4" href="https://try.vsnth.dev" target="_blank" rel="noopener">Try Outs</a>
+                            <a href="https://slides.vsnth.dev" target="_blank" rel="noopener">Slides</a>
+                        </nav>
+                    </div>
                 </div>
             </footer>
         )
