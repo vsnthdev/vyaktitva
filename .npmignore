@@ -1,5 +1,7 @@
 src/
 www/
 tsconfig.json
+stencil.config.ts
+vercel.json
 .npmrc
 !dist/
