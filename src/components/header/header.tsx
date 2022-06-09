@@ -5,7 +5,7 @@
 
 import { Component, Element, Prop, State, h } from "@stencil/core"
 import { join, isHydrated } from '../../util/ui'
-import { DebouncedFunc, throttle } from 'lodash';
+import { DebouncedFunc, throttle } from 'lodash'
 
 @Component({
     tag: 'v-header',
@@ -78,23 +78,6 @@ export class Header {
         animate()
     }
 
-    toggleTheme: () => void = () => {
-        const html = document.querySelector('html')
-        const themeColor = document.querySelector('meta[name=theme-color]')
-
-        console.log(themeColor)
-
-        if (html.classList.contains('dark')) {
-            // switch to light theme
-            html.classList.remove('dark')
-            themeColor.setAttribute('content', '#ffffff')
-        } else {
-            // switch to dark theme
-            html.classList.add('dark')
-            themeColor.setAttribute('content', '#1e293b')
-        }
-    }
-
     componentWillLoad() {
         this.onResize()
     }
@@ -113,9 +96,9 @@ export class Header {
         return (
             <header class={"font-body select-none"}>
                 <div class="bg-inherit container mx-auto px-7 py-7 flex justify-between items-center font-semibold">
-                    <div class="w-full flex">
-                        <span class="text-lg cursor-pointer" onClick={this.toggleTheme}>{this.brand}</span>
-                    </div>
+                    <a href="/" class="w-full flex">
+                        <span class="text-lg cursor-pointer">{this.brand}</span>
+                    </a>
 
                     {/* mobile navigation button */}
                     <button class="md:hidden" onClick={() => { this.open = !this.open }}>
