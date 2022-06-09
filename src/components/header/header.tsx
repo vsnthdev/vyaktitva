@@ -13,6 +13,7 @@ import { DebouncedFunc, throttle } from 'lodash'
 })
 export class Header {
     @Prop() brand: string
+    @Prop() styled: boolean = true
     @Prop() navstyle: boolean = true
     
     @State() open: boolean = false
@@ -58,7 +59,7 @@ export class Header {
     applyNavStyle: () => void = () => {
         if (this.navstyle == false) return
         
-        const computedStyle = getComputedStyle(this.element)
+        const computedStyle = getComputedStyle(this.element).backgroundColor != 'rgba(0, 0, 0, 0)' ? getComputedStyle(this.element) : getComputedStyle(this.element.querySelector('div'))
         let lastFrameBackground
         let lastFrameColor
 
@@ -94,11 +95,13 @@ export class Header {
 
     render() {
         return (
-            <header class={"font-body select-none"}>
+            <header class={`font-body select-none ${this.styled && 'border-b border-slate-200 bg-white dark:bg-slate-800 dark:border-slate-700'}`}>
                 <div class="bg-inherit container mx-auto px-7 py-7 flex justify-between items-center font-semibold">
-                    <a href="/" class="w-full flex">
-                        <span class="text-lg cursor-pointer">{this.brand}</span>
-                    </a>
+                    <div class="w-full flex">
+                        <a href="/">
+                            <span class="text-lg cursor-pointer">{this.brand}</span>
+                        </a>
+                    </div>
 
                     {/* mobile navigation button */}
                     <button class="md:hidden" onClick={() => { this.open = !this.open }}>
@@ -115,10 +118,10 @@ export class Header {
                     ])}>
                         <nav class={join([
                             // mobile styles
-                            "h-full w-56 px-5 py-10 flex flex-col space-y-3 duration-200",
+                            "h-full w-56 px-5 py-10 flex flex-col space-y-3 duration-200 border-l shadow-xl shadow-black/5 dark:border-slate-700 dark:shadow-black/50",
 
                             // desktop styles
-                            "md:bg-transparent md:translate-x-0 md:opacity-100 md:flex-row md:p-0 md:w-full md:items-center md:justify-center md:space-y-0 md:space-x-6",
+                            "md:bg-transparent md:translate-x-0 md:opacity-100 md:flex-row md:p-0 md:w-full md:items-center md:justify-center md:space-y-0 md:space-x-6 md:shadow-none md:border-0",
 
                             // open or close styles
                             (this.open ? "opacity-100 translate-x-0" : "opacity-0 translate-x-56"),

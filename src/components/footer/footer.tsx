@@ -11,10 +11,11 @@ import { Component, Prop, h } from "@stencil/core"
 })
 export class Footer {
     @Prop() brand: string
+    @Prop() styled: boolean = true
 
     render() {
         return (
-            <footer class={"py-10 px-7"}>
+            <footer class={`py-10 px-7 ${this.styled && 'bg-white border-t border-slate-200 dark:bg-slate-800 dark:border-slate-700'}`}>
                 <div class="flex flex-col container mx-auto font-body space-y-6 md:space-y-0 md:flex-row md:space-x-12">
                     {/* first section */}
                     <div class="flex flex-col">
@@ -24,7 +25,7 @@ export class Footer {
                         </div>
 
                         {/* navigation links */}
-                        <nav class="flex space-x-4 font-semibold">
+                        <nav class="flex space-x-4 font-medium">
                             <a href="https://vasanthdeveloper.com/privacy">Privacy Policy</a>
                             <a href="https://vasanthdeveloper.com/contact">Contact Us</a>
                         </nav>
