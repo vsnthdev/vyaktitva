@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="v-h-full v-dark">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <title>vyaktitva</title>
 
         <!-- prerequisite assets -->
         <link rel="stylesheet" href="/build/vyaktitva.css">
         <meta name="theme-color" content="#1e293b">
 
-        <!-- load vyaktitva -->
+        <!-- vyaktitva -->
         <script type="module" src="/build/vyaktitva.esm.js"></script>
         <script nomodule src="/build/vyaktitva.js"></script>
+        <link rel="stylesheet" href="./assets/css/fonts.css">
 
         <!-- switch theme accordingly -->
         <script>
@@ -22,28 +22,28 @@
             setThemeColor(window.matchMedia('(prefers-color-scheme: light)').matches)
 
             if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches)
-                document.querySelector('html').classList.remove('dark')
+                document.querySelector('html').classList.remove('v-dark')
             
             // listen for system theme change, and update accordingly
             window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', event => {
                 if (event.matches) {
-                    document.querySelector('html').classList.remove('dark')
+                    document.querySelector('html').classList.remove('v-dark')
                     setThemeColor(true)
                 } else {
-                    document.querySelector('html').classList.add('dark')
+                    document.querySelector('html').classList.add('v-dark')
                     setThemeColor(false)
                 }
             })
         </script>
     </head>
 
-    <body class="h-screen flex flex-col bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-white" style="height: 200vh;">
+    <body class="v-h-full v-flex v-flex-col v-bg-slate-100 v-text-slate-700 dark:v-bg-slate-900 dark:v-text-white" style="height: 200vh;">
         <!-- the header -->
-        <v-header brand="vyaktitva" class="z-50"></v-header>
+        <v-header brand="vyaktitva" class="v-z-50"></v-header>
 
         <!-- the sub header -->
-        <v-sub-header brand="vyaktitva" class="sticky top-0 z-40">
-            <div class="flex space-x-2 md:space-x-4">
+        <v-sub-header brand="vyaktitva" class="v-sticky v-top-0 v-z-40">
+            <div class="v-flex v-space-x-2 md:v-space-x-4">
                 <a href="#">One</a>
                 <a href="#">Two</a>
                 <a href="#">Three</a>
@@ -52,6 +52,6 @@
         </v-sub-header>
 
         <!-- the footer -->
-        <v-footer brand="vyaktitva" class="mt-auto "></v-footer>
+        <v-footer brand="vyaktitva" class="v-mt-auto"></v-footer>
     </body>
 </html>

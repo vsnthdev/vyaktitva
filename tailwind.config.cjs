@@ -1,6 +1,8 @@
 const colors = require('tailwindcss/colors')
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+    prefix: 'v-',
     darkMode: 'class',
     content: [
         './src/components/**/*.tsx',
@@ -8,13 +10,24 @@ module.exports = {
     ],
     theme: {
         fontFamily: {
-            body: ['Basically A Sans Serif']
+            sans: [
+                'Basically A Sans Serif',
+                'ui-sans-serif',
+                'system-ui',
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"Segoe UI"',
+                'Roboto',
+                '"Helvetica Neue"',
+                'Arial',
+                '"Noto Sans"',
+                'sans-serif',
+            ]
         },
         extend: {
             colors: {
-                brand: '#006cff'
+                primary: '#006cff'
             }
         }
-    },
-    plugins: [],
+    }
 }

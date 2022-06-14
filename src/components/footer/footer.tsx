@@ -15,32 +15,32 @@ export class Footer {
 
     render() {
         return (
-            <footer class={`py-10 px-7 ${this.styled && 'bg-white border-t border-slate-200 dark:bg-slate-800 dark:border-slate-700'}`}>
-                <div class="flex flex-col container mx-auto font-body space-y-6 md:space-y-0 md:flex-row md:space-x-12">
+            <footer class={this.styled && 'v-py-10 v-px-7 v-bg-white v-border-t v-border-slate-200 dark:v-bg-slate-800 dark:v-border-slate-700'}>
+                <div class="v-flex v-flex-col v-container v-mx-auto v-font-body v-space-y-6 md:v-space-y-0 md:v-flex-row md:v-space-x-12">
                     {/* first section */}
-                    <div class="flex flex-col">
+                    <div class="v-flex v-flex-col">
                         {/* section header */}
-                        <div class="w-full flex mb-3">
-                            <span class="text-2xl font-semibold">{this.brand}</span>
+                        <div class="v-w-full v-flex v-mb-3">
+                            <span class="v-text-2xl v-font-semibold">{this.brand}</span>
                         </div>
 
                         {/* navigation links */}
-                        <nav class="flex space-x-4 font-medium">
+                        <nav class="v-flex v-space-x-4 v-font-medium">
                             <a href="https://vasanthdeveloper.com/privacy">Privacy Policy</a>
                             <a href="https://vasanthdeveloper.com/contact">Contact Us</a>
                         </nav>
                     </div>
 
                     {/* projects section */}
-                    <div class="flex flex-col justify-end">
+                    <div class="v-flex v-flex-col v-justify-end">
                         {/* section header */}
-                        <div class="w-full flex mb-3">
-                            <span class="text-xl font-medium">Additional Links</span>
+                        <div class="v-w-full v-flex v-mb-3">
+                            <span class="v-text-xl v-font-medium">Additional Links</span>
                         </div>
 
                         {/* navigation links */}
-                        <nav class="flex font-medium">
-                            <a class="mr-4" href="https://try.vsnth.dev" target="_blank" rel="noopener">Try Outs</a>
+                        <nav class="v-flex v-font-medium">
+                            <a class="v-mr-4" href="https://try.vsnth.dev" target="_blank" rel="noopener">Try Outs</a>
                             <a href="https://slides.vsnth.dev" target="_blank" rel="noopener">Slides</a>
                         </nav>
                     </div>

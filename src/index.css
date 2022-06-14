@@ -1,24 +1,26 @@
-@import url('./assets/css/fonts.css');
-
+/* TailwindCSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* some additional base customizations */
+@layer base {
+    :host {
+        display: block;
+    }
 
-:host {
-    display: block;
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    *::-webkit-scrollbar {
+        display: none;
+    }
 }
 
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
-*::-webkit-scrollbar {
-    display: none;
-}
-
-@media screen(md) {
+/* a fix for navigation on tablets */
+@media (min-width: theme('screens.md')) {
     header > div > div:nth-child(3) {
         height: fit-content !important;
     }
-} 
+}

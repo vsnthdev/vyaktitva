@@ -15,9 +15,9 @@ export class SubHeader {
 
     render() {
         return (
-            <div class={`font-body ${this.styled && 'font-medium border-b border-slate-200 bg-white/[0.85] backdrop-blur-xl dark:text-white dark:border-slate-700 dark:bg-slate-800/90'}`}>
-                <div class={"container mx-auto px-7 py-5 flex"}>
-                    <div class="hidden font-semibold mr-5 md:flex">
+            <div class={`${this.styled && 'v-font-medium v-border-b v-border-slate-200 v-bg-white/[0.85] v-backdrop-blur-xl dark:v-text-white dark:v-border-slate-700 dark:v-bg-slate-800/90'}`}>
+                <div class="v-container v-mx-auto v-px-7 v-py-5 v-flex">
+                    <div class="v-hidden v-font-semibold v-mr-5 md:v-flex">
                         <span>{this.brand}</span>
                     </div>
                     <slot/>
