@@ -1,0 +1,24 @@
+/*
+ *  Entry stylesheet file for vyaktitva website.
+ *  Created On 28 December 2022
+ */
+
+/* TailwindCSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* additional base customizations */
+@layer base {
+    :host {
+        display: block;
+    }
+
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    *::-webkit-scrollbar {
+        display: none;
+    }
+}
