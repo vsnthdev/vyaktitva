@@ -3,10 +3,12 @@
  *  Created On 28 December 2022
  */
 
+import { Header } from './lib/index'
+
 const App = () => {
-    return <main>
-        <h1>hello world</h1>
-    </main>
+    return <>
+        <Header brand='vyaktitva' />
+    </>
 }
 
 export default App

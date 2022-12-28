@@ -8,7 +8,8 @@ const vyaktitva = require('./tailwind.config.cjs')
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
-        "./src/index.html"
+        "./src/index.html",
+        "./src/lib/**/*.{js,ts,jsx,tsx}"
     ],
     theme: vyaktitva.theme
 }

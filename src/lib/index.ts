@@ -3,4 +3,4 @@
  *  Created On 28 December 2022
  */
 
-export const greeting = 'hello'
+export { Header } from './Header'
