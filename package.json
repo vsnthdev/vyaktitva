@@ -5,6 +5,7 @@
     "license": "zlib",
     "type": "module",
     "types": "dist/index.d.ts",
+    "main": "dist/vyaktitva.es.js",
     "homepage": "https://github.com/vsnthdev/vyaktitva#readme",
     "bugs": "https://github.com/vsnthdev/vyaktitva/issues",
     "author": {

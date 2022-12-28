@@ -14,7 +14,8 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'src/lib/index.ts'),
             name: 'vyaktitva',
-            fileName: format => `vyaktitva.${format}.js`
+            fileName: format => `vyaktitva.${format}.js`,
+            formats: ['es']
         },
         rollupOptions: {
             external: ['react', 'react-dom'],
