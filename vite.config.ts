@@ -9,7 +9,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
     build: {
-        emptyOutDir: true,
+        emptyOutDir: false,
         outDir: path.resolve('dist'),
         lib: {
             entry: path.resolve(__dirname, 'src/lib/index.ts'),
