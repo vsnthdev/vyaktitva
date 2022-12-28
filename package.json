@@ -4,6 +4,7 @@
     "version": "0.2.0",
     "license": "zlib",
     "type": "module",
+    "types": "dist/index.d.ts",
     "homepage": "https://github.com/vsnthdev/vyaktitva#readme",
     "bugs": "https://github.com/vsnthdev/vyaktitva/issues",
     "author": {
@@ -18,6 +19,10 @@
     "engines": {
         "node": "16.x"
     },
+    "files": [
+        "dist",
+        "tailwind.config.cjs"
+    ],
     "scripts": {
         "dev": "vite --config vite.config.ts src",
         "clean": "rimraf dist",
