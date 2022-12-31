@@ -115,7 +115,7 @@ export const Header = (props: HeaderProps) => {
         {/* mobile navigation menu */}
         <div
             data-close='true'
-            className={`z-[999] fixed h-[100vh] inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            className={`select-none z-[999] fixed h-[100vh] inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
             onClick={e => (e.target as any).dataset.close && toggleMobileNav(false)}>
             <div
                 className={`fixed right-0 top-0 h-full bg-slate-800 pl-9 py-6 transition-transform ${mobileNavOpen ? 'delay-100 translate-x-0' : 'translate-x-56'}`}>
