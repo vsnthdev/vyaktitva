@@ -72,9 +72,14 @@ export const Header = (props: HeaderProps) => {
     // hooks
     const [mobileNavOpen, toggleMobileNav] = useState(false)
 
-    // when window is resized
     useEffect(() => {
+        // when window is resized
         window.addEventListener('resize', debounce(() => {
+            toggleMobileNav(false)
+        }, 1000, true))
+
+        // when the page is scrolled
+        window.addEventListener('scroll', debounce(() => {
             toggleMobileNav(false)
         }, 1000, true))
     }, [])
