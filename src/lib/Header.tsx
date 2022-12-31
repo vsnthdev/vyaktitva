@@ -3,7 +3,7 @@
  *  Created On 28 December 2022
  */
 
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SvgBlob } from 'react-svg-blob'
 import { debounce } from 'debounce'
 
@@ -110,16 +110,16 @@ export const Header = (props: HeaderProps) => {
         {/* mobile navigation menu */}
         <div
             data-close='true'
-            className={`fixed inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            className={`z-[999] fixed inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
             onClick={e => (e.target as any).dataset.close && toggleMobileNav(false)}>
             <div
-                className={`absolute right-0 top-0 h-screen bg-slate-800 pl-6 py-6 transition-transform ${mobileNavOpen ? 'delay-100 translate-x-0' : 'translate-x-36'}`}>
+                className={`absolute right-0 top-0 h-screen bg-slate-800 pl-9 py-6 transition-transform ${mobileNavOpen ? 'delay-100 translate-x-0' : 'translate-x-56'}`}>
                 <div className='flex flex-col mr-6 space-y-6'>
-                    <span className='text-lg font-semibold pl-2'>Menu</span>
-                    <div className='flex flex-col space-y-4'>
-                        {links.map(link => <a key={link.url} className='pl-2 pr-16' href={link.url}>{link.name}</a>)}
+                    <span className='text-xl font-semibold pt-2'>Menu</span>
+                    <div className='flex flex-col font-semibold'>
+                        {links.map(link => <a key={link.url} className='pr-24 py-2' href={link.url}>{link.name}</a>)}
                     </div>
-                    <div className='flex space-x-4 pl-2 pt-4'>
+                    <div className='flex space-x-6 pl-2 pt-4'>
                         {socials.map(social => <a key={social.url} href={social.url} target="_blank" rel="noopener">{social.icon}</a>)}
                     </div>
                 </div>
