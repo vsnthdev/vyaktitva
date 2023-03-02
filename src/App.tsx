@@ -4,11 +4,12 @@
  */
 
 import React from 'react'
-import { Header } from './lib/index'
+import { Header, Footer } from './lib/index'
 
 const App = () => {
     return <>
         <Header brand='vyaktitva' />
+        <Footer />
     </>
 }
 
