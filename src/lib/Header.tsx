@@ -96,7 +96,7 @@ export const Header = (props: HeaderProps) => {
                 <nav className='hidden w-full justify-center lg:flex'>
                     {links.map(link => <div key={link.url} className='relative mx-7'>
                         <a className='peer z-10 relative' href={link.url}>{link.name}</a>
-                        <SvgBlob className='absolute -top-6 -left-8 z-0 transition-opacity pointer-events-none opacity-0 peer-hover:opacity-100' width={75} variant='gradient' colors={['#b5179e', '#f15bb5']} shapeProps={generateShapeProps()} />
+                        <SvgBlob className='absolute -top-6 -left-8 z-0 transition-opacity pointer-events-none opacity-0 peer-hover:opacity-100' width={75} variant='gradient' colors={['#60efff', '#0061ff']} shapeProps={generateShapeProps()} />
                     </div>)}
                 </nav>
 
