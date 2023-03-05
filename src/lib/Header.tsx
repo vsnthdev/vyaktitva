@@ -42,7 +42,7 @@ const socials = [
     {
         name: 'LinkedIn',
         url: 'https://vas.cx/linkedin',
-        icon: <svg className='w-4 aspect-square' enable-background='new 0 0 32 32' version='1.0' viewBox='0 0 32 32' xmlSpace='preserve'
+        icon: <svg className='w-4 aspect-square' enableBackground='new 0 0 32 32' version='1.0' viewBox='0 0 32 32' xmlSpace='preserve'
             xmlns='http://www.w3.org/2000/svg'>
             <g>
                 <rect fill='currentColor' height='23' width='7' y='9' />
@@ -69,13 +69,14 @@ const generateShapeProps = () => {
 
 interface HeaderProps {
     brand: string
+    onSearch?: () => any
 }
 
 // COMPONENT
 
 export const Header = (props: HeaderProps) => {
     // props
-    const { brand } = props
+    const { brand, onSearch } = props
 
     // hooks
     const [mobileNavOpen, toggleMobileNav] = useState(false)
@@ -109,8 +110,15 @@ export const Header = (props: HeaderProps) => {
                 </nav>
 
                 {/* social media icons for desktops/laptops */}
-                <div className='hidden w-full justify-end space-x-7 lg:flex'>
+                <div className='hidden w-full items-center justify-end space-x-7 lg:flex'>
                     {socials.map(social => <a key={social.url} href={social.url} target='_blank' rel='noopener'>{social.icon}</a>)}
+
+                    {/* search button */}
+                    {onSearch && <div className='hidden pl-2 lg:flex'>
+                        <svg onClick={() => onSearch()} className='w-6 aspect-square cursor-pointer' fill="none" stroke="currentColor" strokeWidth={3} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </div>}
                 </div>
 
                 {/* mobile burger menu */}
