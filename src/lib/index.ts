@@ -5,3 +5,5 @@
 
 export { Header } from './Header'
 export { Footer } from './Footer'
+export { KBar, actions } from './KBar'
+export { KBarProvider, useKBar, useRegisterActions } from 'kbar'

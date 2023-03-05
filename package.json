@@ -48,6 +48,7 @@
     },
     "dependencies": {
         "debounce": "^1.2.1",
+        "kbar": "^0.1.0-beta.40",
         "react-svg-blob": "^0.3.1"
     }
 }
