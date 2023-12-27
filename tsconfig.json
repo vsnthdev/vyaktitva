@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "allowJs": false,
+        "outDir": "dist",
+        "target": "ESNext",
+        "jsx": "react",
+        "declaration": true,
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "resolveJsonModule": true,
+        "moduleResolution": "Node",
+        "emitDeclarationOnly": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": [
+            "DOM",
+            "ESNext",
+            "DOM.Iterable"
+        ],
+    },
+    "exclude": [
+        "node_modules"
+    ],
+    "include": [
+        "src/lib/**/*.ts",
+        "src/lib/**/*.tsx"
+    ]
+}

@@ -27,7 +27,7 @@
     "scripts": {
         "dev": "vite --config vite.config.ts src",
         "clean": "rimraf dist",
-        "build": "rimraf dist && tsc \"src/lib/index.ts\" --strict --allowJs false --outDir dist -t esnext --jsx react-jsx -d --emitDeclarationOnly --skipLibCheck true --isolatedModules true --esModuleInterop false --resolveJsonModule true --moduleResolution node --useDefineForClassFields true --allowSyntheticDefaultImports true --forceConsistentCasingInFileNames true --lib \"DOM, DOM.Iterable, ESNext\" && vite build --config vite.config.ts src"
+        "build": "rimraf dist && tsc && vite build --config vite.config.ts src"
     },
     "devDependencies": {
         "@types/debounce": "^1.2.4",
