@@ -3,7 +3,7 @@
  *  Created On 28 December 2022
  */
 
-import { debounce } from 'debounce'
+import debounce from 'debounce'
 import { SvgBlob } from 'react-svg-blob'
 import React, { useEffect, useState } from 'react'
 
@@ -85,12 +85,12 @@ export const Header = (props: HeaderProps) => {
         // when window is resized
         window.addEventListener('resize', debounce(() => {
             toggleMobileNav(false)
-        }, 1000, true))
+        }, 1000))
 
         // when the page is scrolled
         window.addEventListener('scroll', debounce(() => {
             toggleMobileNav(false)
-        }, 1000, true))
+        }, 1000))
     }, [])
 
     return <>
