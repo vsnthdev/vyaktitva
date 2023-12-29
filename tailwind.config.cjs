@@ -37,7 +37,6 @@ module.exports = {
         extend: {
             colors: {
                 primary: '#006cff',
-                'slate-1000': '#050d20',
             },
             backgroundImage: {
                 dots: 'radial-gradient(rgba(255, 255, 255, 0.2) 5%, transparent 0)'

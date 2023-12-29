@@ -105,7 +105,7 @@ export const Header = (props: HeaderProps) => {
                 <nav className='hidden w-full justify-center lg:flex'>
                     {links.map(link => <div key={link.url} className='relative mx-7'>
                         <a className='peer z-10 relative' href={link.url}>{link.name}</a>
-                        <SvgBlob className='absolute -top-6 -left-8 z-0 transition-opacity pointer-events-none opacity-0 peer-hover:opacity-100' width={75} variant='gradient' colors={['#60efff', '#0061ff']} shapeProps={generateShapeProps()} />
+                        <SvgBlob className='absolute -top-6 -left-8 z-0 transition-opacity pointer-events-none opacity-0 peer-hover:opacity-100' width={75} variant='gradient' colors={['#ff0f7b', '#f89b29']} shapeProps={generateShapeProps()} />
                     </div>)}
                 </nav>
 
@@ -134,10 +134,10 @@ export const Header = (props: HeaderProps) => {
             className={`select-none z-[999] fixed h-[100vh] inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
             onClick={e => (e.target as any).dataset.close && toggleMobileNav(false)}>
             <div
-                className={`fixed right-0 top-0 h-full bg-slate-800 pl-9 py-6 transition-transform ${mobileNavOpen ? 'delay-100 translate-x-0' : 'translate-x-56'}`}>
+                className={`fixed right-0 top-0 h-full bg-stone-800 pl-9 py-6 transition-transform ${mobileNavOpen ? 'delay-100 translate-x-0' : 'translate-x-56'}`}>
                 <div className='flex flex-col mr-6 space-y-6'>
-                    <span className='text-xl font-semibold pt-2'>Menu</span>
-                    <div className='flex flex-col font-semibold'>
+                    <span className='text-xl font-medium pt-2'>Menu</span>
+                    <div className='flex flex-col font-medium'>
                         {links.map(link => <a key={link.url} className='pr-24 py-2' href={link.url}>{link.name}</a>)}
                     </div>
                     <div className='flex space-x-6 pl-2 pt-4'>
