@@ -13,6 +13,7 @@ export const actions: Action[] = [
         name: 'Home',
         priority: 100,
         section: 'Main',
+        keywords: 'portfolio home goto main',
         icon: <HomeIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vsnth.dev" },
     },
@@ -21,6 +22,7 @@ export const actions: Action[] = [
         name: 'Blog',
         priority: 100,
         section: 'Main',
+        keywords: 'articles blog posts writing',
         icon: <GalleryVerticalEndIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vasanthdeveloper.com" },
     },
@@ -29,6 +31,7 @@ export const actions: Action[] = [
         priority: 100,
         section: 'Main',
         name: 'About me',
+        keywords: 'know me about myself vasanth developer srivatsa',
         icon: <UserCircleIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vas.cx/about" },
     },
@@ -38,6 +41,7 @@ export const actions: Action[] = [
         name: 'YouTube',
         section: 'Social',
         icon: <YoutubeIcon className='w-[19px] h-[19px]' />,
+        keywords: 'social watch videos entertainment knowledge tutorials howto profile',
         perform: () => { window.location.href = "https://vas.cx/videos" },
     },
     {
@@ -45,6 +49,7 @@ export const actions: Action[] = [
         priority: 99,
         name: 'GitHub',
         section: 'Social',
+        keywords: 'projects work code developer software profile',
         icon: <GithubIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vas.cx/github" },
     },
@@ -54,9 +59,17 @@ export const actions: Action[] = [
         name: 'LinkedIn',
         section: 'Social',
         icon: <LinkedinIcon className='w-[19px] h-[19px]' />,
+        keywords: 'connect professional network social profile',
         perform: () => { window.location.href = "https://vas.cx/linkedin" },
     },
 ]
+
+const getKeywords = (str: string): string => {
+    return str
+        .toLowerCase() // Convert to lowercase first
+        .replace(/\B./g, ''); // Remove every other character except for word boundaries
+};
+
 
 export function KBar() {
     // HOOKS
@@ -76,6 +89,7 @@ export function KBar() {
                     priority: 20,
                     name: short.title,
                     section: 'Shorts',
+                    keywords: getKeywords(short.title),
                     icon: <ZapIcon className='w-5 h-5' />,
                     perform: () => window.open(`https://youtube.com/watch?v=${short.id}`),
                 })))
@@ -88,6 +102,7 @@ export function KBar() {
                     priority: 10,
                     name: video.title,
                     section: 'Videos',
+                    keywords: getKeywords(video.title),
                     icon: <VideoIcon className='w-5 h-5' />,
                     perform: () => window.open(`https://youtube.com/watch?v=${video.id}`),
                 })))
@@ -100,6 +115,7 @@ export function KBar() {
                     priority: 30,
                     name: article.title,
                     section: 'Articles',
+                    keywords: getKeywords(article.title),
                     icon: <BookOpenIcon className='w-5 h-5' />,
                     perform: () => window.open(`https://vasanthdeveloper.com/${article.slug}`),
                 })))
