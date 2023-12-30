@@ -3,9 +3,9 @@
  *  Created On 28 December 2022
  */
 
-import debounce from 'debounce'
 import { SvgBlob } from 'react-svg-blob'
 import React, { useEffect, useState } from 'react'
+import { useThrottledCallback } from 'use-debounce'
 import { YoutubeIcon, GithubIcon, LinkedinIcon, SearchIcon, MenuIcon } from 'lucide-react'
 
 // CONSTANTS
@@ -64,19 +64,19 @@ export function Header(props: HeaderProps) {
     // props
     const { brand, onSearch } = props
 
-    // hooks
-    const [mobileNavOpen, toggleMobileNav] = useState(false)
+    // HOOKS
+    const [navOpen, setNavOpen] = useState(false)
+    const closeMobileNav = useThrottledCallback(() => setNavOpen(false), 512)
 
+    // close mobile nav menu when scrolling or resizing
+    // the page to prevent any skewing
     useEffect(() => {
-        // when window is resized
-        window.addEventListener('resize', debounce(() => {
-            toggleMobileNav(false)
-        }, 1000))
-
-        // when the page is scrolled
-        window.addEventListener('scroll', debounce(() => {
-            toggleMobileNav(false)
-        }, 1000))
+        window.addEventListener('scroll', closeMobileNav)
+        window.addEventListener('resize', closeMobileNav)
+        return () => {
+            window.removeEventListener('scroll', closeMobileNav)
+            window.removeEventListener('resize', closeMobileNav)
+        }
     }, [])
 
     return <>
@@ -109,7 +109,7 @@ export function Header(props: HeaderProps) {
                 </div>
 
                 {/* mobile burger menu */}
-                <div className='lg:hidden cursor-pointer' onClick={() => toggleMobileNav(true)}>
+                <div className='lg:hidden cursor-pointer' onClick={() => setNavOpen(true)}>
                     <MenuIcon className='w-7 h-7' />
                 </div>
             </div>
@@ -118,10 +118,10 @@ export function Header(props: HeaderProps) {
         {/* mobile navigation menu */}
         <div
             data-close='true'
-            className={`select-none z-[999] fixed h-[100vh] inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${mobileNavOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-            onClick={e => (e.target as any).dataset.close && toggleMobileNav(false)}>
+            className={`select-none z-[999] fixed h-[100vh] inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${navOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+            onClick={e => (e.target as any).dataset.close && setNavOpen(false)}>
             <div
-                className={`fixed right-0 top-0 h-full bg-stone-800 pl-9 py-6 transition-transform ${mobileNavOpen ? 'delay-100 translate-x-0' : 'translate-x-56'}`}>
+                className={`fixed right-0 top-0 h-full bg-stone-800 pl-9 py-6 transition-transform ${navOpen ? 'delay-100 translate-x-0' : 'translate-x-56'}`}>
                 <div className='flex flex-col mr-6 space-y-4'>
                     <span className='text-xl font-medium pt-2'>Menu</span>
                     <div className='flex flex-col font-medium'>
