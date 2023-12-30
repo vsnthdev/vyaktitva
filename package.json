@@ -1,7 +1,7 @@
 {
     "name": "vyaktitva",
     "description": "( व्यक्तित्व ) — A component based UI library for Vasanth's projects.",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "license": "zlib",
     "type": "module",
     "types": "dist/index.d.ts",
