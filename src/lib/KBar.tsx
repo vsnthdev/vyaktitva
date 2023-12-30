@@ -3,14 +3,15 @@
  *  Created On 05 March 2023
  */
 
-import React from 'react'
-import { Action, useMatches, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch, KBarResults } from 'kbar'
-import { HomeIcon, GalleryVerticalEndIcon, UserCircleIcon, GithubIcon, YoutubeIcon, LinkedinIcon, BirdIcon, SearchIcon } from 'lucide-react';
+import React, { useEffect, useState } from 'react'
+import { Action, useMatches, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch, KBarResults, useRegisterActions, createAction } from 'kbar'
+import { HomeIcon, GalleryVerticalEndIcon, UserCircleIcon, GithubIcon, YoutubeIcon, LinkedinIcon, BirdIcon, SearchIcon, ZapIcon, VideoIcon, BookOpenIcon } from 'lucide-react';
 
 export const actions: Action[] = [
     {
         id: 'home',
         name: 'Home',
+        priority: 100,
         section: 'Main',
         icon: <HomeIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vsnth.dev" },
@@ -18,18 +19,21 @@ export const actions: Action[] = [
     {
         id: 'blog',
         name: 'Blog',
+        priority: 100,
         section: 'Main',
         icon: <GalleryVerticalEndIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vasanthdeveloper.com" },
     },
     {
         id: 'about',
-        name: 'About me',
+        priority: 100,
         section: 'Main',
+        name: 'About me',
         icon: <UserCircleIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vas.cx/about" },
     },
     {
+        priority: 99,
         id: 'youtube',
         name: 'YouTube',
         section: 'Social',
@@ -38,12 +42,14 @@ export const actions: Action[] = [
     },
     {
         id: 'github',
+        priority: 99,
         name: 'GitHub',
         section: 'Social',
         icon: <GithubIcon className='w-[19px] h-[19px]' />,
         perform: () => { window.location.href = "https://vas.cx/github" },
     },
     {
+        priority: 99,
         id: 'linkedin',
         name: 'LinkedIn',
         section: 'Social',
@@ -53,8 +59,52 @@ export const actions: Action[] = [
 ]
 
 export function KBar() {
-    // hooks
+    // HOOKS
     const { results } = useMatches()
+    const [shorts, setShorts] = useState<Action[]>([])
+    const [videos, setVideos] = useState<Action[]>([])
+    const [articles, setArticles] = useState<Action[]>([])
+    useRegisterActions(shorts, [shorts])
+    useRegisterActions(videos, [videos])
+    useRegisterActions(articles, [articles])
+
+    useEffect(() => {
+        fetch('https://vsnth.dev/api/shorts')
+            .then(res => res.json())
+            .then(shorts => {
+                setShorts(shorts.map((short: any) => createAction({
+                    priority: 20,
+                    name: short.title,
+                    section: 'Shorts',
+                    icon: <ZapIcon className='w-5 h-5' />,
+                    perform: () => window.open(`https://youtube.com/watch?v=${short.id}`),
+                })))
+            })
+
+        fetch('https://vsnth.dev/api/videos')
+            .then(res => res.json())
+            .then(videos => {
+                setVideos(videos.map((video: any) => createAction({
+                    priority: 10,
+                    name: video.title,
+                    section: 'Videos',
+                    icon: <VideoIcon className='w-5 h-5' />,
+                    perform: () => window.open(`https://youtube.com/watch?v=${video.id}`),
+                })))
+            })
+
+        fetch('https://vasanthdeveloper.com/api.json')
+            .then(res => res.json())
+            .then(articles => {
+                setArticles(articles.map((article: any) => createAction({
+                    priority: 30,
+                    name: article.title,
+                    section: 'Articles',
+                    icon: <BookOpenIcon className='w-5 h-5' />,
+                    perform: () => window.open(`https://vasanthdeveloper.com/${article.slug}`),
+                })))
+            })
+    }, [])
 
     return <KBarPortal>
         <KBarPositioner
