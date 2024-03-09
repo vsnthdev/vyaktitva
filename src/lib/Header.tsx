@@ -3,6 +3,7 @@
  *  Created On 28 December 2022
  */
 
+import { Drawer } from 'vaul'
 import { SvgBlob } from 'react-svg-blob'
 import React, { useEffect, useState } from 'react'
 import { useThrottledCallback } from 'use-debounce'
@@ -79,7 +80,7 @@ export function Header(props: HeaderProps) {
         }
     }, [])
 
-    return <>
+    return <Drawer.Root direction='right'>
         <header className='select-none'>
             <div className='container mx-auto font-medium py-10 px-10 flex justify-between text-lg lg:py-14'>
                 {/* logo */}
@@ -109,29 +110,35 @@ export function Header(props: HeaderProps) {
                 </div>
 
                 {/* mobile burger menu */}
-                <div className='lg:hidden cursor-pointer' onClick={() => setNavOpen(true)}>
+                <Drawer.Trigger className='lg:hidden cursor-pointer'>
                     <MenuIcon className='w-7 h-7' />
-                </div>
+                </Drawer.Trigger>
             </div>
         </header>
 
         {/* mobile navigation menu */}
-        <div
-            data-close='true'
-            className={`select-none z-[999] fixed h-[100vh] inset-0 backdrop-blur-sm transition-opacity duration-300 bg-black/40 ${navOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-            onClick={e => (e.target as any).dataset.close && setNavOpen(false)}>
-            <div
-                className={`fixed right-0 top-0 h-full bg-stone-800 pl-9 py-6 transition-transform ${navOpen ? 'delay-100 translate-x-0' : 'translate-x-56'}`}>
-                <div className='flex flex-col mr-6 space-y-4'>
+        <Drawer.Portal>
+            <Drawer.Overlay className='bg-black/40 fixed h-[100vh] inset-0 backdrop-blur-sm' />
+
+            <Drawer.Content className='bg-stone-800 fixed right-0 top-0 h-full pl-4 py-6 rounded-l-2xl flex'>
+                <div className='h-full flex items-center pr-4'>
+                    <div className='w-[0.4rem] h-10 bg-stone-950 rounded-full' />
+                </div>
+
+                <div className='flex flex-col mr-6 space-y-4 w-full'>
                     <span className='text-xl font-medium pt-2'>Menu</span>
                     <div className='flex flex-col font-medium'>
-                        {links.map(link => <a key={link.url} className='pr-24 py-2' href={link.url}>{link.name}</a>)}
+                        {links.map(link => <Drawer.Trigger className='pr-24 py-2 text-left'>
+                            <a key={link.url} href={link.url}>{link.name}</a>
+                        </Drawer.Trigger>)}
                     </div>
                     <div className='flex space-x-6 pl-2 pt-2'>
-                        {socials.map(social => <a key={social.url} href={social.url} target="_blank" rel="noopener">{social.icon}</a>)}
+                        {socials.map(social => <Drawer.Trigger>
+                            <a key={social.url} href={social.url} target="_blank" rel="noopener">{social.icon}</a>
+                        </Drawer.Trigger>)}
                     </div>
                 </div>
-            </div>
-        </div>
-    </>
+            </Drawer.Content>
+        </Drawer.Portal>
+    </Drawer.Root>
 }
