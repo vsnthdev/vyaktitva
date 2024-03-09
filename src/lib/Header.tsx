@@ -111,9 +111,9 @@ export function Header(props: HeaderProps) {
 
                 <div className='flex flex-col mr-6 space-y-4 w-full'>
                     <span className='text-xl font-medium pt-2'>Menu</span>
-                    <div className='flex flex-col font-medium'>
-                        {links.map(link => <Drawer.Trigger key={link.url} className='pr-24 py-2 text-left'>
-                            <a href={link.url}>{link.name}</a>
+                    <div className='flex flex-col font-medium w-full min-w-36'>
+                        {links.map(link => <Drawer.Trigger key={link.url} className='text-left flex w-full'>
+                            <a href={link.url} className='py-2 w-full'>{link.name}</a>
                         </Drawer.Trigger>)}
                     </div>
                     <div className='flex space-x-6 pl-2 pt-2'>
