@@ -4,9 +4,8 @@
  */
 
 import { Drawer } from 'vaul'
+import React, { } from 'react'
 import { SvgBlob } from 'react-svg-blob'
-import React, { useEffect, useState } from 'react'
-import { useThrottledCallback } from 'use-debounce'
 import { YoutubeIcon, GithubIcon, LinkedinIcon, SearchIcon, MenuIcon } from 'lucide-react'
 
 // CONSTANTS
@@ -65,21 +64,6 @@ export function Header(props: HeaderProps) {
     // props
     const { brand, onSearch } = props
 
-    // HOOKS
-    const [navOpen, setNavOpen] = useState(false)
-    const closeMobileNav = useThrottledCallback(() => setNavOpen(false), 512)
-
-    // close mobile nav menu when scrolling or resizing
-    // the page to prevent any skewing
-    useEffect(() => {
-        window.addEventListener('scroll', closeMobileNav)
-        window.addEventListener('resize', closeMobileNav)
-        return () => {
-            window.removeEventListener('scroll', closeMobileNav)
-            window.removeEventListener('resize', closeMobileNav)
-        }
-    }, [])
-
     return <Drawer.Root direction='right'>
         <header className='select-none'>
             <div className='container mx-auto font-medium py-10 px-10 flex justify-between text-lg lg:py-14'>
@@ -118,9 +102,9 @@ export function Header(props: HeaderProps) {
 
         {/* mobile navigation menu */}
         <Drawer.Portal>
-            <Drawer.Overlay className='bg-black/40 fixed h-[100vh] inset-0 backdrop-blur-sm' />
+            <Drawer.Overlay className='bg-black/40 fixed h-[100vh] inset-0 backdrop-blur-sm z-[999]' />
 
-            <Drawer.Content className='bg-stone-800 fixed right-0 top-0 h-full pl-4 py-6 rounded-l-2xl flex'>
+            <Drawer.Content className='bg-stone-800 fixed right-0 top-0 h-full pl-4 py-6 rounded-l-2xl flex z-[1000]'>
                 <div className='h-full flex items-center pr-4'>
                     <div className='w-[0.4rem] h-10 bg-stone-950 rounded-full' />
                 </div>
@@ -128,13 +112,13 @@ export function Header(props: HeaderProps) {
                 <div className='flex flex-col mr-6 space-y-4 w-full'>
                     <span className='text-xl font-medium pt-2'>Menu</span>
                     <div className='flex flex-col font-medium'>
-                        {links.map(link => <Drawer.Trigger className='pr-24 py-2 text-left'>
-                            <a key={link.url} href={link.url}>{link.name}</a>
+                        {links.map(link => <Drawer.Trigger key={link.url} className='pr-24 py-2 text-left'>
+                            <a href={link.url}>{link.name}</a>
                         </Drawer.Trigger>)}
                     </div>
                     <div className='flex space-x-6 pl-2 pt-2'>
-                        {socials.map(social => <Drawer.Trigger>
-                            <a key={social.url} href={social.url} target="_blank" rel="noopener">{social.icon}</a>
+                        {socials.map(social => <Drawer.Trigger key={social.url}>
+                            <a href={social.url} target="_blank" rel="noopener">{social.icon}</a>
                         </Drawer.Trigger>)}
                     </div>
                 </div>
