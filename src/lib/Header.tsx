@@ -22,14 +22,14 @@ const links = [
         url: 'https://vasanthdeveloper.com'
     },
     {
-        name: 'Projects',
+        name: 'Slides',
         edges: 6,
-        url: 'https://github.com/vsnthdev?tab=repositories'
+        url: 'https://slides.vsnth.dev'
     },
     {
         name: 'About',
         edges: 4,
-        url: 'https://vas.cx/about'
+        url: 'https://vsnth.dev#about'
     }
 ]
 
