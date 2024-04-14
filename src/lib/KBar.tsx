@@ -3,9 +3,9 @@
  *  Created On 05 March 2023
  */
 
-import React, { useEffect, useState } from 'react'
-import { Action, useMatches, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch, KBarResults, useRegisterActions, createAction } from 'kbar'
-import { HomeIcon, GalleryVerticalEndIcon, UserCircleIcon, GithubIcon, YoutubeIcon, LinkedinIcon, BirdIcon, SearchIcon, ZapIcon, VideoIcon, BookOpenIcon } from 'lucide-react';
+import React from 'react'
+import { Action, useMatches, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch, KBarResults } from 'kbar'
+import { HomeIcon, GalleryVerticalEndIcon, UserCircleIcon, GithubIcon, YoutubeIcon, LinkedinIcon, BirdIcon, SearchIcon, PresentationIcon } from 'lucide-react';
 
 export const actions: Action[] = [
     {
@@ -14,7 +14,7 @@ export const actions: Action[] = [
         priority: 100,
         section: 'Main',
         keywords: 'portfolio home goto main',
-        icon: <HomeIcon className='w-[19px] h-[19px]' />,
+        icon: <HomeIcon className='size-[19px]' />,
         perform: () => { window.location.href = "https://vsnth.dev" },
     },
     {
@@ -23,8 +23,17 @@ export const actions: Action[] = [
         priority: 100,
         section: 'Main',
         keywords: 'articles blog posts writing',
-        icon: <GalleryVerticalEndIcon className='w-[19px] h-[19px]' />,
+        icon: <GalleryVerticalEndIcon className='size-[19px]' />,
         perform: () => { window.location.href = "https://vasanthdeveloper.com" },
+    },
+    {
+        id: 'slides',
+        name: 'Slides',
+        priority: 100,
+        section: 'Main',
+        keywords: 'sessions presentations events',
+        icon: <PresentationIcon className='size-[19px]' />,
+        perform: () => { window.location.href = "https://slides.vsnth.dev" },
     },
     {
         id: 'about',
@@ -32,7 +41,7 @@ export const actions: Action[] = [
         section: 'Main',
         name: 'About me',
         keywords: 'know me about myself vasanth developer srivatsa',
-        icon: <UserCircleIcon className='w-[19px] h-[19px]' />,
+        icon: <UserCircleIcon className='size-[19px]' />,
         perform: () => { window.location.href = "https://vas.cx/about" },
     },
     {
@@ -40,7 +49,7 @@ export const actions: Action[] = [
         id: 'youtube',
         name: 'YouTube',
         section: 'Social',
-        icon: <YoutubeIcon className='w-[19px] h-[19px]' />,
+        icon: <YoutubeIcon className='size-[19px]' />,
         keywords: 'social watch videos entertainment knowledge tutorials howto profile',
         perform: () => { window.location.href = "https://vas.cx/videos" },
     },
@@ -50,7 +59,7 @@ export const actions: Action[] = [
         name: 'GitHub',
         section: 'Social',
         keywords: 'projects work code developer software profile',
-        icon: <GithubIcon className='w-[19px] h-[19px]' />,
+        icon: <GithubIcon className='size-[19px]' />,
         perform: () => { window.location.href = "https://vas.cx/github" },
     },
     {
@@ -58,69 +67,15 @@ export const actions: Action[] = [
         id: 'linkedin',
         name: 'LinkedIn',
         section: 'Social',
-        icon: <LinkedinIcon className='w-[19px] h-[19px]' />,
+        icon: <LinkedinIcon className='size-[19px]' />,
         keywords: 'connect professional network social profile',
         perform: () => { window.location.href = "https://vas.cx/linkedin" },
     },
 ]
 
-const getKeywords = (str: string): string => {
-    return str
-        .toLowerCase() // Convert to lowercase first
-        .replace(/\B./g, ''); // Remove every other character except for word boundaries
-};
-
-
 export function KBar() {
     // HOOKS
     const { results } = useMatches()
-    const [shorts, setShorts] = useState<Action[]>([])
-    const [videos, setVideos] = useState<Action[]>([])
-    const [articles, setArticles] = useState<Action[]>([])
-    useRegisterActions(shorts, [shorts])
-    useRegisterActions(videos, [videos])
-    useRegisterActions(articles, [articles])
-
-    useEffect(() => {
-        fetch('https://vsnth.dev/api/shorts')
-            .then(res => res.json())
-            .then(shorts => {
-                setShorts(shorts.map((short: any) => createAction({
-                    priority: 20,
-                    name: short.title,
-                    section: 'Shorts',
-                    keywords: getKeywords(short.title),
-                    icon: <ZapIcon className='w-5 h-5' />,
-                    perform: () => window.open(`https://youtube.com/watch?v=${short.id}`),
-                })))
-            })
-
-        fetch('https://vsnth.dev/api/videos')
-            .then(res => res.json())
-            .then(videos => {
-                setVideos(videos.map((video: any) => createAction({
-                    priority: 10,
-                    name: video.title,
-                    section: 'Videos',
-                    keywords: getKeywords(video.title),
-                    icon: <VideoIcon className='w-5 h-5' />,
-                    perform: () => window.open(`https://youtube.com/watch?v=${video.id}`),
-                })))
-            })
-
-        fetch('https://vasanthdeveloper.com/api.json')
-            .then(res => res.json())
-            .then(articles => {
-                setArticles(articles.map((article: any) => createAction({
-                    priority: 30,
-                    name: article.title,
-                    section: 'Articles',
-                    keywords: getKeywords(article.title),
-                    icon: <BookOpenIcon className='w-5 h-5' />,
-                    perform: () => window.open(`https://vasanthdeveloper.com/${article.slug}`),
-                })))
-            })
-    }, [])
 
     return <KBarPortal>
         <KBarPositioner
