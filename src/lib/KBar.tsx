@@ -6,7 +6,7 @@
 import React from 'react'
 import { Action, useMatches, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch, KBarResults } from 'kbar'
 import { HomeIcon, GalleryVerticalEndIcon, UserCircleIcon, BirdIcon, SearchIcon, PresentationIcon } from 'lucide-react';
-import { YoutubeLogo, GithubLogo, LinkedinLogo, XLogo, DiscordLogo } from '@phosphor-icons/react';
+import { YoutubeLogo, GithubLogo, LinkedinLogo, XLogo, DiscordLogo, DribbbleLogo, WhatsappLogo, At } from '@phosphor-icons/react';
 
 export const actions: Action[] = [
     {
@@ -78,7 +78,7 @@ export const actions: Action[] = [
         name: 'X',
         section: 'Social',
         icon: <XLogo weight='bold' className='size-[19px]' />,
-        keywords: 'connect professional network social profile',
+        keywords: 'connect casual network social profile twitter',
         perform: () => { window.location.href = "https://vas.cx/twitter" },
     },
     {
@@ -87,8 +87,35 @@ export const actions: Action[] = [
         name: 'Discord',
         section: 'Social',
         icon: <DiscordLogo weight='bold' className='size-[19px]' />,
-        keywords: 'connect professional network social profile',
+        keywords: 'connect network social profile server community',
         perform: () => { window.location.href = "https://vas.cx/discord" },
+    },
+    {
+        priority: 99,
+        id: 'dribbble',
+        name: 'Dribbble',
+        section: 'Social',
+        icon: <DribbbleLogo weight='bold' className='size-[19px]' />,
+        keywords: 'connect design artwork logo creative profile',
+        perform: () => { window.location.href = "https://vas.cx/dribbble" },
+    },
+    {
+        priority: 99,
+        id: 'whatsapp',
+        name: 'WhatsApp',
+        section: 'Social',
+        icon: <WhatsappLogo weight='bold' className='size-[19px]' />,
+        keywords: 'connect personal chat talk call profile',
+        perform: () => { window.location.href = "https://vas.cx/gtel" },
+    },
+    {
+        priority: 99,
+        id: 'mail',
+        name: 'Email',
+        section: 'Social',
+        icon: <At weight='bold' className='size-[19px]' />,
+        keywords: 'mail gmail address send',
+        perform: () => { window.location.href = "https://vas.cx/mail" },
     },
 ]
 
