@@ -102,7 +102,7 @@ export function Header(props: HeaderProps) {
 
         {/* mobile navigation menu */}
         <Drawer.Portal>
-            <Drawer.Overlay className='bg-black/40 fixed h-[100vh] inset-0 backdrop-blur-sm z-[999]' />
+            <Drawer.Overlay className='bg-black/60 fixed h-[100vh] inset-0 z-[999]' />
 
             <Drawer.Content className='bg-stone-800 fixed right-0 top-0 h-full pl-4 py-6 rounded-l-2xl flex z-[1000]'>
                 <div className='h-full flex items-center pr-4'>
