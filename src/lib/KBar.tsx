@@ -5,7 +5,8 @@
 
 import React from 'react'
 import { Action, useMatches, KBarPortal, KBarPositioner, KBarAnimator, KBarSearch, KBarResults } from 'kbar'
-import { HomeIcon, GalleryVerticalEndIcon, UserCircleIcon, GithubIcon, YoutubeIcon, LinkedinIcon, BirdIcon, SearchIcon, PresentationIcon } from 'lucide-react';
+import { HomeIcon, GalleryVerticalEndIcon, UserCircleIcon, BirdIcon, SearchIcon, PresentationIcon } from 'lucide-react';
+import { YoutubeLogo, GithubLogo, LinkedinLogo, XLogo, DiscordLogo } from '@phosphor-icons/react';
 
 export const actions: Action[] = [
     {
@@ -49,7 +50,7 @@ export const actions: Action[] = [
         id: 'youtube',
         name: 'YouTube',
         section: 'Social',
-        icon: <YoutubeIcon className='size-[19px]' />,
+        icon: <YoutubeLogo weight='bold' className='size-[19px]' />,
         keywords: 'social watch videos entertainment knowledge tutorials howto profile',
         perform: () => { window.location.href = "https://vas.cx/videos" },
     },
@@ -59,7 +60,7 @@ export const actions: Action[] = [
         name: 'GitHub',
         section: 'Social',
         keywords: 'projects work code developer software profile',
-        icon: <GithubIcon className='size-[19px]' />,
+        icon: <GithubLogo weight='bold' className='size-[19px]' />,
         perform: () => { window.location.href = "https://vas.cx/github" },
     },
     {
@@ -67,9 +68,27 @@ export const actions: Action[] = [
         id: 'linkedin',
         name: 'LinkedIn',
         section: 'Social',
-        icon: <LinkedinIcon className='size-[19px]' />,
+        icon: <LinkedinLogo weight='bold' className='size-[19px]' />,
         keywords: 'connect professional network social profile',
         perform: () => { window.location.href = "https://vas.cx/linkedin" },
+    },
+    {
+        priority: 99,
+        id: 'x',
+        name: 'X',
+        section: 'Social',
+        icon: <XLogo weight='bold' className='size-[19px]' />,
+        keywords: 'connect professional network social profile',
+        perform: () => { window.location.href = "https://vas.cx/twitter" },
+    },
+    {
+        priority: 99,
+        id: 'discord',
+        name: 'Discord',
+        section: 'Social',
+        icon: <DiscordLogo weight='bold' className='size-[19px]' />,
+        keywords: 'connect professional network social profile',
+        perform: () => { window.location.href = "https://vas.cx/discord" },
     },
 ]
 
@@ -79,7 +98,7 @@ export function KBar() {
 
     return <KBarPortal>
         <KBarPositioner
-            className='z-[1001] bg-black/60 backdrop-blur-sm'
+            className='z-[1001] bg-black/60'
             style={{
                 animationName: 'animate-opacity',
                 animationDuration: '200ms',
