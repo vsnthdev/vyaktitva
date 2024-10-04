@@ -76,7 +76,7 @@ export function Header(props: HeaderProps) {
                 <nav className='hidden w-full justify-center lg:flex'>
                     {links.map(link => <div key={link.url} className='relative mx-7'>
                         <a className='peer z-10 relative' href={link.url}>{link.name}</a>
-                        <SvgBlob className='absolute -top-6 -left-8 z-0 transition-opacity pointer-events-none opacity-0 peer-hover:opacity-100' width={75} variant='gradient' colors={['#ff0f7b', '#f89b29']} shapeProps={{
+                        <SvgBlob className='absolute -top-6 -left-8 z-0 transition-opacity pointer-events-none opacity-0 peer-hover:opacity-100' width={75} variant='gradient' colors={['#a855f7', '#4f46e5']} shapeProps={{
                             growth: 6,
                             edges: link.edges,
                         }} />
@@ -104,9 +104,9 @@ export function Header(props: HeaderProps) {
         <Drawer.Portal>
             <Drawer.Overlay className='bg-black/60 fixed h-[100vh] inset-0 z-[999]' />
 
-            <Drawer.Content className='bg-stone-800 fixed right-0 top-0 h-full pl-4 py-6 rounded-l-2xl flex z-[1000]'>
+            <Drawer.Content className='bg-neutral-800 fixed right-0 top-0 h-full pl-4 py-6 rounded-l-2xl flex z-[1000]'>
                 <div className='h-full flex items-center pr-4'>
-                    <div className='w-[0.4rem] h-10 bg-stone-950 rounded-full' />
+                    <div className='w-[0.4rem] h-10 bg-neutral-950 rounded-full' />
                 </div>
 
                 <div className='flex flex-col mr-6 space-y-4 w-full'>

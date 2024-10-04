@@ -125,12 +125,12 @@ export function KBar() {
 
     return <KBarPortal>
         <KBarPositioner
-            className='z-[1001] bg-black/60'
+            className='z-[1001] bg-black/40 transform-gpu backdrop-blur-sm'
             style={{
                 animationName: 'animate-opacity',
                 animationDuration: '200ms',
             }}>
-            <KBarAnimator className='font-content bg-stone-900 rounded-md shadow-xl flex flex-col space-x-4 w-[35rem] overflow-hidden'>
+            <KBarAnimator className='font-content bg-neutral-800 rounded-md shadow-xl flex flex-col space-x-4 w-[35rem] overflow-hidden'>
                 <div className='flex px-2 font-medium text-neutral-400 focus-within:text-neutral-200 selection:bg-white/20'>
                     <div className='flex items-center ml-3 mt-[2px]'>
                         <SearchIcon className='w-5 h-5 aspect-square transition-colors' strokeWidth={2.2} />
@@ -139,7 +139,7 @@ export function KBar() {
                 </div>
                 <div className='flex flex-col'>
                     {/* showing results */}
-                    {results.length != 0 && <div className='animate-faceIn border-t-2 border-stone-700/50 pb-3 pt-2'>
+                    {results.length != 0 && <div className='animate-faceIn border-t-2 border-neutral-700/50 pb-3 pt-2'>
                         <KBarResults
                             items={results}
                             onRender={({ item, active }) =>
@@ -153,7 +153,7 @@ export function KBar() {
                                     <div className='flex flex-col py-1'>
                                         <div className='flex flex-col px-4'>
                                             <div
-                                                className={`flex pl-4 py-3 transition-colors rounded-md ${active ? 'bg-stone-600/70 cursor-pointer' : 'bg-stone-700/40'}`}>
+                                                className={`flex pl-4 py-3 transition-colors rounded-md ${active ? 'bg-neutral-600 cursor-pointer' : 'bg-neutral-700/40'}`}>
                                                 {/* the icon */}
                                                 {item.icon && <div
                                                     className={`flex items-center justify-center ml-0 mr-3 transition-colors ${active
