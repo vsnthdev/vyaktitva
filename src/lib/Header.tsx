@@ -6,7 +6,8 @@
 import { Drawer } from 'vaul'
 import React, { } from 'react'
 import { SvgBlob } from 'react-svg-blob'
-import { YoutubeIcon, GithubIcon, LinkedinIcon, SearchIcon, MenuIcon } from 'lucide-react'
+import { SearchIcon, MenuIcon } from 'lucide-react'
+import { YoutubeLogo, GithubLogo, LinkedinLogo } from '@phosphor-icons/react/dist/ssr';
 
 // CONSTANTS
 
@@ -37,17 +38,17 @@ const socials = [
     {
         name: 'YouTube',
         url: 'https://vas.cx/youtube',
-        icon: <YoutubeIcon className='w-5 h-5' />,
+        icon: <YoutubeLogo weight='bold' className='w-5 h-5' />,
     },
     {
         name: 'GitHub',
         url: 'https://vas.cx/github',
-        icon: <GithubIcon className='w-5 h-5' />,
+        icon: <GithubLogo weight='bold' className='w-5 h-5' />,
     },
     {
         name: 'LinkedIn',
         url: 'https://vas.cx/linkedin',
-        icon: <LinkedinIcon className='w-5 h-5' />,
+        icon: <LinkedinLogo weight='bold' className='w-5 h-5' />,
     }
 ]
 
