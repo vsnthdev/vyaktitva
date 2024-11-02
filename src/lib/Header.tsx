@@ -23,9 +23,9 @@ const links = [
         url: 'https://vasanthdeveloper.com'
     },
     {
-        name: 'Slides',
+        name: 'Sessions',
         edges: 6,
-        url: 'https://slides.vsnth.dev'
+        url: 'https://sessions.vsnth.dev'
     },
     {
         name: 'About',
