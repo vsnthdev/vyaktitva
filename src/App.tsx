@@ -4,13 +4,14 @@
  */
 
 import React from 'react'
-import { Header, Footer, KBar, KBarProvider, actions } from './lib/index'
+import { Header, Footer, KBar, KBarProvider, actions, CmdK } from './lib/index'
 
 const App = () => {
     return <KBarProvider actions={actions}>
         <Header brand='vyaktitva' />
         <Footer />
-        <KBar />
+        {/* <KBar /> */}
+        <CmdK />
     </KBarProvider>
 }
 

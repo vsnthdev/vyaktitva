@@ -37,6 +37,7 @@
         "@types/react-dom": "^18.3.1",
         "@vitejs/plugin-react": "^4.3.3",
         "autoprefixer": "^10.4.20",
+        "cmdk": "^1.0.3",
         "lucide-react": "^0.454.0",
         "postcss": "^8.4.47",
         "react": "^18.3.1",
@@ -51,7 +52,6 @@
         "tailwindcss": "^3.2.7"
     },
     "dependencies": {
-        "kbar": "^0.1.0-beta.45",
         "react-svg-blob": "^0.3.1"
     }
 }

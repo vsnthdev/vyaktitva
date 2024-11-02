@@ -4,7 +4,7 @@
         "allowJs": false,
         "outDir": "dist",
         "target": "ESNext",
-        "jsx": "react",
+        "jsx": "react-jsx",
         "declaration": true,
         "skipLibCheck": true,
         "isolatedModules": true,
