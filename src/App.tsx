@@ -3,14 +3,16 @@
  *  Created On 28 December 2022
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Header, Footer, CmdK } from './lib/index'
 
 const App = () => {
+    const [open, setOpen] = useState(false)
+
     return <>
         <Header brand='vyaktitva' />
         <Footer />
-        <CmdK />
+        <CmdK open={open} setOpen={setOpen} />
     </>
 }
 

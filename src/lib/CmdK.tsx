@@ -25,10 +25,14 @@ function Item({ icon, name, onSelect }: { icon: ReactNode, name: string, onSelec
     </Command.Item>
 }
 
-export function CmdK() {
-    // HOOKS
-    const [open, setOpen] = useState(false)
+type SetOpen = (current: boolean) => any
 
+interface CmdKProps {
+    open: boolean
+    setOpen: (isOpen: boolean | SetOpen) => void
+}
+
+export function CmdK({ open, setOpen }: CmdKProps) {
     useEffect(() => {
         const down = (e: globalThis.KeyboardEvent) => {
             if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
