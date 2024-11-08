@@ -56,9 +56,9 @@ export function CmdK({ open, setOpen }: CmdKProps) {
                 opacity: 1,
                 backdropFilter: 'blur(2px)'
             }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.03 }}
             onClick={() => setOpen(false)}
-            className='grid place-items-center fixed inset-0 z-[1001] bg-black/40'>
+            className='grid place-items-center fixed inset-0 will-change-transform transform-gpu z-[1001] bg-black/40'>
             <div className='font-content bg-neutral-800 rounded-md shadow-xl flex flex-col w-[35rem] overflow-hidden'>
                 <div className='flex px-2 font-medium text-neutral-400 focus-within:text-neutral-200 selection:bg-white/20'>
                     <div className='flex items-center ml-3 mt-[2px]'>
@@ -69,7 +69,7 @@ export function CmdK({ open, setOpen }: CmdKProps) {
                         className='w-full outline-none transition-colors bg-transparent rounded pl-4 pr-6 py-4 placeholder:text-neutral-400'
                     />
                 </div>
-                <Command.List className='flex flex-col border-t-2 border-neutral-700 p-4 overflow-y-scroll max-h-[475px] [&>div[cmdk-list-sizer]]:flex [&>div[cmdk-list-sizer]]:flex-col [&>div[cmdk-list-sizer]]:gap-y-4'>
+                <Command.List className='flex flex-col border-t-2 border-neutral-700 py-4 px-5 overflow-y-scroll max-h-[475px] [&>div[cmdk-list-sizer]]:flex [&>div[cmdk-list-sizer]]:flex-col [&>div[cmdk-list-sizer]]:gap-y-4'>
                     <Command.Empty className='select-none pointer-events-none  text-neutral-400 flex flex-col justify-center items-center pt-8 pb-12 space-y-4'>
                         <BirdIcon className='w-20 h-20 select-none' strokeWidth={1} />
                         <p className='text-lg'>No search results</p>
