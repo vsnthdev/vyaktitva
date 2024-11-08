@@ -4,10 +4,11 @@
  */
 
 import { Drawer } from 'vaul'
-import React, { } from 'react'
 import { SvgBlob } from 'react-svg-blob'
 import { SearchIcon, MenuIcon } from 'lucide-react'
+import { motion, useInView, useIsPresent } from 'framer-motion'
 import { YoutubeLogo, GithubLogo, LinkedinLogo } from '@phosphor-icons/react/dist/ssr';
+import { useEffect, useRef, useState } from 'react';
 
 // CONSTANTS
 
@@ -65,34 +66,136 @@ export function Header(props: HeaderProps) {
     // props
     const { brand, onSearch } = props
 
+    // HOOKS
+    const headerRef = useRef(null)
+    const inView = useInView(headerRef)
+
     return <Drawer.Root direction='right'>
-        <header className='select-none'>
+        <header ref={headerRef} className='select-none'>
             <div className='container mx-auto font-medium py-10 px-10 flex justify-between text-lg lg:py-14'>
                 {/* logo */}
                 <div className='w-full flex'>
-                    <span className='text-xl'>{brand}</span>
+                    <motion.span
+                        className='text-xl will-change-transform transform-gpu'
+                        initial='initial'
+                        transition={{
+                            delay: 0.2,
+                            type: 'spring',
+                        }}
+                        animate={inView ? 'animate' : 'initial'}
+                        variants={{
+                            initial: {
+                                y: -85,
+                                opacity: 0
+                            },
+                            animate: {
+                                y: 0,
+                                opacity: 1
+                            }
+                        }}
+                    >{brand}</motion.span>
                 </div>
 
                 {/* navigation for desktops/laptops */}
-                <nav className='hidden w-full justify-center lg:flex'>
-                    {links.map(link => <div key={link.url} className='relative mx-7'>
+                <motion.nav
+                    initial='initial'
+                    animate={inView ? 'animate' : 'initial'}
+                    className='hidden w-full justify-center lg:flex'
+                    variants={{
+                        initial: {
+                            opacity: 1,
+                        },
+                        animate: {
+                            opacity: 1,
+                            transition: {
+                                staggerChildren: 0.05,
+                                when: 'beforeChildren',
+                            }
+                        }
+                    }}>
+                    {links.map(link => <motion.div
+                        key={link.name}
+                        className='relative mx-7'
+                        transition={{
+                            type: 'spring',
+                        }}
+                        variants={{
+                            initial: {
+                                y: -85,
+                                opacity: 0
+                            },
+                            animate: {
+                                y: 0,
+                                opacity: 1,
+                            }
+                        }}>
                         <a className='peer z-10 relative' href={link.url}>{link.name}</a>
                         <SvgBlob className='absolute -top-6 -left-8 z-0 transition-opacity pointer-events-none opacity-0 peer-hover:opacity-100' width={75} variant='gradient' colors={['#a855f7', '#4f46e5']} shapeProps={{
                             growth: 6,
                             edges: link.edges,
                         }} />
-                    </div>)}
-                </nav>
+                    </motion.div>)}
+                </motion.nav>
 
                 {/* social media icons for desktops/laptops */}
-                <div className='hidden w-full items-center justify-end space-x-7 lg:flex'>
-                    {socials.map(social => <a key={social.url} href={social.url} target='_blank' rel='noopener'>{social.icon}</a>)}
+                <motion.div
+                    className='hidden w-full items-center justify-end space-x-7 lg:flex'
+                    initial='initial'
+                    animate={inView ? 'animate' : 'initial'}
+                    variants={{
+                        initial: {
+                            opacity: 1,
+                        },
+                        animate: {
+                            opacity: 1,
+                            transition: {
+                                delayChildren: 0.2,
+                                staggerChildren: 0.05,
+                                when: 'beforeChildren',
+                                staggerDirection: -1,
+                            }
+                        }
+                    }}>
+                    {socials.map(social => <motion.a
+                        key={social.name}
+                        href={social.url}
+                        target='_blank'
+                        rel='noopener'
+                        transition={{
+                            type: 'spring',
+                        }}
+                        variants={{
+                            initial: {
+                                y: -85,
+                                opacity: 0
+                            },
+                            animate: {
+                                y: 0,
+                                opacity: 1,
+                            }
+                        }}>
+                        {social.icon}
+                    </motion.a>)}
 
                     {/* search button */}
-                    {onSearch && <div className='hidden pl-3 justify-center items-center lg:flex'>
+                    {onSearch && <motion.div
+                        transition={{
+                            type: 'spring',
+                        }}
+                        variants={{
+                            initial: {
+                                y: -85,
+                                opacity: 0
+                            },
+                            animate: {
+                                y: 0,
+                                opacity: 1,
+                            }
+                        }}
+                        className='hidden pl-3 justify-center items-center lg:flex'>
                         <SearchIcon className='w-6 h-6 cursor-pointer' onClick={() => onSearch()} />
-                    </div>}
-                </div>
+                    </motion.div>}
+                </motion.div>
 
                 {/* mobile burger menu */}
                 <Drawer.Trigger className='lg:hidden cursor-pointer'>
