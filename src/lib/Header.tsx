@@ -198,9 +198,28 @@ export function Header(props: HeaderProps) {
                 </motion.div>
 
                 {/* mobile burger menu */}
-                <Drawer.Trigger className='lg:hidden cursor-pointer'>
-                    <MenuIcon className='w-7 h-7' />
-                </Drawer.Trigger>
+                <motion.div
+                    className='lg:hidden'
+                    initial='initial'
+                    transition={{
+                        delay: 0.3,
+                        type: 'spring',
+                    }}
+                    animate={inView ? 'animate' : 'initial'}
+                    variants={{
+                        initial: {
+                            y: -85,
+                            opacity: 0
+                        },
+                        animate: {
+                            y: 0,
+                            opacity: 1
+                        }
+                    }}>
+                    <Drawer.Trigger className='cursor-pointer'>
+                        <MenuIcon className='w-7 h-7' />
+                    </Drawer.Trigger>
+                </motion.div>
             </div>
         </header>
 
