@@ -4,15 +4,12 @@
  */
 
 import React, { useState } from 'react'
-import { Header, Footer, CmdK } from './lib/index'
+import { Header, Footer } from './lib/index'
 
 const App = () => {
-    const [open, setOpen] = useState(false)
-
     return <>
         <Header brand='vyaktitva' />
         <Footer />
-        <CmdK open={open} setOpen={setOpen} />
     </>
 }
 

@@ -37,12 +37,19 @@ module.exports = {
         extend: {
             colors: {
                 primary: '#006cff',
-            },
-            backgroundImage: {
-                dots: 'radial-gradient(rgba(255, 255, 255, 0.2) 5%, transparent 0)'
-            },
-            backgroundSize: {
-                'size-dots': '35px 35px'
+                undertone: {
+                    50: '#f3f5fc',
+                    100: '#e7ecf7',
+                    200: '#c9d6ee',
+                    300: '#99b5e0',
+                    400: '#638ecd',
+                    500: '#3f6fb8',
+                    600: '#2e579b',
+                    700: '#26467e',
+                    800: '#233d69',
+                    900: '#223458',
+                    950: '#0a0f1a',
+                },
             },
             keyframes: {
                 faceIn: {
