@@ -1,13 +1,6 @@
 {
     "name": "vyaktitva",
-    "description": "( व्यक्तित्व ) — A component based UI library for Vasanth's projects.",
     "version": "3.0.0",
-    "license": "zlib",
-    "type": "module",
-    "types": "dist/index.d.ts",
-    "main": "dist/vyaktitva.es.js",
-    "homepage": "https://github.com/vsnthdev/vyaktitva#readme",
-    "bugs": "https://github.com/vsnthdev/vyaktitva/issues",
     "author": {
         "email": "hey@vsnth.dev",
         "url": "https://vsnth.dev",
@@ -17,18 +10,7 @@
         "type": "git",
         "url": "https://github.com/vsnthdev/vyaktitva.git"
     },
-    "engines": {
-        "node": ">=18"
-    },
-    "files": [
-        "dist",
-        "tailwind.config.cjs"
-    ],
-    "scripts": {
-        "dev": "vite --config vite.config.ts src",
-        "clean": "rimraf dist",
-        "build": "rimraf dist && tsc && vite build --config vite.config.ts src"
-    },
+    "main": "dist/vyaktitva.es.js",
     "devDependencies": {
         "@phosphor-icons/react": "^2.1.7",
         "@types/debounce": "^1.2.4",
@@ -37,6 +19,7 @@
         "@types/react-dom": "^18.3.1",
         "@vitejs/plugin-react": "^4.3.3",
         "autoprefixer": "^10.4.20",
+        "clsx": "^2.1.1",
         "framer-motion": "^11.11.17",
         "lucide-react": "^0.460.0",
         "postcss": "^8.4.49",
@@ -45,13 +28,27 @@
         "rimraf": "^6.0.1",
         "typescript": "^5.6.3",
         "use-debounce": "^10.0.4",
-        "vaul": "^1.1.1",
         "vite": "^5.4.11"
     },
     "peerDependencies": {
         "tailwindcss": "^3.2.7"
     },
-    "dependencies": {
-        "react-svg-blob": "^0.3.1"
-    }
+    "bugs": "https://github.com/vsnthdev/vyaktitva/issues",
+    "description": "( व्यक्तित्व ) — A component based UI library for Vasanth's projects.",
+    "engines": {
+        "node": ">=18"
+    },
+    "files": [
+        "dist",
+        "tailwind.config.cjs"
+    ],
+    "homepage": "https://github.com/vsnthdev/vyaktitva#readme",
+    "license": "zlib",
+    "scripts": {
+        "dev": "vite --config vite.config.ts src",
+        "clean": "rimraf dist",
+        "build": "rimraf dist && tsc && vite build --config vite.config.ts src"
+    },
+    "type": "module",
+    "types": "dist/index.d.ts"
 }
