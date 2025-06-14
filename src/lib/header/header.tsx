@@ -56,7 +56,7 @@ const socials = [
 
 // COMPONENT
 
-export function Header({ activeId, className }: { activeId?: string, className: string }) {
+export function Header({ activeId, className }: { activeId?: string, className?: string }) {
     return <>
         <div className="fixed z-40 w-full bottom-0 flex pb-10 justify-center md:justify-end md:pr-10 md:pb-12">
             <header className={twMerge(
@@ -64,7 +64,7 @@ export function Header({ activeId, className }: { activeId?: string, className: 
                 'flex items-center shadow-lg shadow-black/40 justify-center rounded-full px-6 py-4 md:py-3 backdrop-blur-md bg-black/30 border-2 border-white/20 text-xs md:text-base',
 
                 // user overrides
-                ...className,
+                className ? className : '',
             )}>
                 <div className='gap-x-6 flex items-center'>
                     {links.map(link => <a key={`header-link-${link.id}`} href={link.url} className={clsx(
