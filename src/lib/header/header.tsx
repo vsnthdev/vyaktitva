@@ -1,7 +1,9 @@
 // CONSTANTS
 
 import { clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from 'tailwind-merge'
+import { motion } from 'framer-motion'
+import { isMobile } from 'react-device-detect'
 import { CircleUserIcon, HouseIcon, MicVocalIcon, NotebookTextIcon } from "lucide-react"
 import { YoutubeLogoIcon, GithubLogoIcon, LinkedinLogoIcon } from '@phosphor-icons/react/dist/ssr'
 
@@ -57,15 +59,47 @@ const socials = [
 // COMPONENT
 
 export function Header({ activeId, className }: { activeId?: string, className?: string }) {
+    // define different animations for mobile and desktop
+    const mobileAnimation = {
+        initial: { y: 100, opacity: 0 },
+        animate: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: 'spring',
+                delay: 0.5,
+            }
+        },
+    }
+
+    const desktopAnimation = {
+        initial: { x: 100, opacity: 0 },
+        animate: {
+            x: 0,
+            opacity: 1,
+            transition: {
+                delay: 0.3,
+                type: 'spring',
+            }
+        },
+    }
+
+    // select animation based on device
+    const animation = isMobile ? mobileAnimation : desktopAnimation
+
     return <>
         <div className="fixed z-40 w-full bottom-0 flex pb-10 justify-center md:justify-end md:pr-10 md:pb-12">
-            <header className={twMerge(
-                // base styles
-                'flex items-center shadow-lg shadow-black/40 justify-center rounded-full px-6 py-4 md:py-3 backdrop-blur-md bg-black/30 border-2 border-white/20 text-xs md:text-base',
+            <motion.header
+                initial={animation.initial}
+                animate={animation.animate}
+                className={twMerge(
+                    // base styles
+                    'flex items-center shadow-lg shadow-black/40 justify-center rounded-full px-6 py-4 md:py-3 backdrop-blur-md bg-black/30 border-2 border-white/20 text-xs md:text-base',
 
-                // user overrides
-                className ? className : '',
-            )}>
+                    // user overrides
+                    className ? className : '',
+                )}
+            >
                 <div className='gap-x-6 flex items-center'>
                     {links.map(link => <a key={`header-link-${link.id}`} href={link.url} className={clsx(
                         // base styles
@@ -84,7 +118,7 @@ export function Header({ activeId, className }: { activeId?: string, className?:
                         <span className="[&>svg]:size-5 md:[&>svg]:size-4">{link.icon}</span>
                     </a>)}
                 </div>
-            </header>
+            </motion.header>
         </div>
     </>
 }
